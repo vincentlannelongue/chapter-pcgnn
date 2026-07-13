@@ -5,7 +5,7 @@ These chosen geometries represent sidewall aneurysms located on the internal car
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=1\textwidth, trim={150 250 250 250}, clip]{nf/Figure01.png}
+    \includegraphics[width=1\textwidth, trim={150 250 250 250}, clip]{figs/anxplore_dataset.png.png}
     \caption{Dataset of 105 semi-idealised patient-specific geometries \cite{goetz_anxplore_2024} with 10 highlighted test cases.}
     \label{fig:anxplore}
 \end{figure}
@@ -29,7 +29,7 @@ We trained for 20 epochs e.g. 144k training steps, using a fixed learning rate \
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.70\textwidth, trim={620 0 700 50}, clip]{nf/Figure02.png}
+    \includegraphics[width=0.70\textwidth, trim={620 0 700 50}, clip]{figs/testset.png}
     \caption{Test set of 10 representative blood flow CFD simulations.}
     \label{fig:test_set}
 \end{figure}
@@ -42,7 +42,7 @@ We trained for 20 epochs e.g. 144k training steps, using a fixed learning rate \
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.9\textwidth]{nf/Figure03.pdf}
+    \includegraphics[width=0.9\textwidth]{figs/evalutation_cases.pdf}
     \caption{Evaluation cases with \textbf{(a)}: cases chosen from our testing dataset for deeper analysis; \textbf{(b)}: pulsatile inflow rate, with 3 chosen time frames for evaluation; \textbf{(c)}: slice and points used for velocity data extraction.}
     \label{fig:eval_cases}
 \end{figure}
@@ -53,7 +53,7 @@ We evaluated all four models on the full test set for both next-step and rollout
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=1.05\textwidth]{nf/Figure04.pdf}
+    \includegraphics[width=1.05\textwidth]{figs/model_rollout_comp.pdf}
 \caption{Rollout predictions at time $t_2$ for all trained models.}
 \label{fig:model_comparison}
 \end{figure}
@@ -80,7 +80,7 @@ Indeed, the In-MGN and In-PI-MGN models produce high-quality rollouts, with the 
 \begin{figure}[!ht]
     \firstround
     \centering
-     \includegraphics[width=0.3\textwidth]{nf/Figure05.pdf}
+     \includegraphics[width=0.3\textwidth]{figs/geometry_zones.pdf}
     \caption{Split of our geometries at planes $y=8.5$ mm and $y=7$ mm to evaluate RMSE metrics in three anatomically regions: the aneurysm bulge (blue), the neck (red) and the parent artery (green).}
     \label{fig:anev_regions}
 \end{figure}
@@ -127,7 +127,7 @@ Figures \ref{fig:streamlines_time} and \ref{fig:streamlines_case_c} show a tempo
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.98\textwidth]{nf/Figure06.pdf}
+    \includegraphics[width=0.98\textwidth]{figs/timeflow_B.pdf}
     \caption{Blood flow during systole for Case B, showing predictions closely matching simulations throughout the acceleration phase}
     \label{fig:streamlines_time}
 \end{figure}
@@ -136,14 +136,14 @@ Quantitative comparisons at the aneurysm neck (\autoref{fig:slice_1}) demonstrat
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.98\textwidth]{nf/Figure07.pdf}
+    \includegraphics[width=0.98\textwidth]{figs/timeflow_C.pdf}
     \caption{Blood flow during systole for Case C, demonstrating accurate predictions in a larger, more asymmetrical aneurysm bulge.}
     \label{fig:streamlines_case_c}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=1\textwidth]{nf/Figure08.pdf}
+\includegraphics[width=1\textwidth]{figs/testset_comp.pdf}
 \caption{Velocity fields comparison for the whole test set at time $t_2$.}
 \label{fig:test_comparison}
 \end{figure}
@@ -156,21 +156,21 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=1\textwidth]{nf/Figure09.pdf}
+    \includegraphics[width=1\textwidth]{figs/neck_slice_comp.pdf}
     \caption{Blood velocity comparison at the aneurysm neck; displayed error is normalized by maximum ground-truth velocity at the given timestep. Maximum error is occurring at high speed flow regions close to the wall, and remains below 8\%.}
     \label{fig:slice_1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{nf/Figure10.pdf}
+    \includegraphics[width=1\textwidth]{figs/point_velocity.pdf.pdf}
 \caption{Velocity evolution plotted over time for Case A.}
 \label{fig:point_velocity_comparison}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{nf/Figure11.pdf}
+    \includegraphics[width=0.7\textwidth]{figs/TAWSS_bulge_comp.pdf.pdf}
     \caption{TAWSS magnitude plotted on the aneurysm bulge, and relative error normalized by maximum ground-truth TAWSS. Error is thresholded to mask errors under 5\%; maximum local error is at 9\%.}
     \label{fig:tawss}
 \end{figure}
@@ -178,14 +178,14 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{nf/Figure12.pdf}
+    \includegraphics[width=0.7\textwidth]{figs/WSS_bulge_comp.pdf}
     \caption{WSS plotted over the aneurysm bulge at different timeframes for Case B.}
     \label{fig:time_wss}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.1\textwidth]{nf/Figure13.pdf}
+\includegraphics[width=1.1\textwidth]{figs/SAWSS_comp.pdf}
 \caption{SAWSS computed over the aneurysm bulge for all 3 test cases.}
 \label{fig:sawss}
 \end{figure}
@@ -194,7 +194,7 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 \begin{figure}[H]
 \firstround
 \centering
-\includegraphics[width=1.1\textwidth]{nf/Figure14.pdf}
+\includegraphics[width=1.1\textwidth]{figs/massflow_comp.pdf}
 \caption{Comparison of mass flow on different cross-sections of evaluation case C.}
 \label{fig:massflow}
 \end{figure}
@@ -210,7 +210,7 @@ First, we examined the model’s robustness to unseen inflow rates. We ran new C
 \begin{figure}[!ht]
 \firstround
 \centering
-\includegraphics[width=0.6\textwidth]{nf/Figure15.png}
+\includegraphics[width=0.6\textwidth]{figs/inflow_rates.png}
 \caption{Different inflow rates derived from patient-specific ICA and MCA data \cite{Hoi2011, Reymond2009}.}
 \label{fig:inflow_profiles}
 \end{figure}
@@ -218,7 +218,7 @@ First, we examined the model’s robustness to unseen inflow rates. We ran new C
 \begin{figure}[!ht]
 \firstround
 \centering
-\includegraphics[width=1\textwidth]{nf/Figure16.pdf}
+\includegraphics[width=1\textwidth]{figs/neck_velocity_comp.pdf.pdf}
 \caption{Blood velocity comparison at the aneurysm neck on unseen velocity profiles.}
 \label{fig:slices_inflow}
 \end{figure}
@@ -267,7 +267,7 @@ Remarkably, the In-PI-MGN model trained only on synthetic semi-idealized geometr
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=1\textwidth]{nf/Figure17.pdf}
+\includegraphics[width=1\textwidth]{figs/0shot_preds.pdf}
 \caption{\secondround Zero-shot predictions on out-of-distribution patient-specific ICA and MCA aneurysm cases.}
 \label{fig:real_cases}
 \end{figure}
