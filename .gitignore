@@ -1,0 +1,38 @@
+# Ignore LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.brf
+*.bcf
+*SAVE-ERROR*
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.synctex(busy)
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.mtc*
+*.maf
+*.run.xml
+*.bcf
+
+# ignore main.pdf (too big)
+Main.pdf
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+*.dvi
+*.pdfsync
+
+# Ignore user-defined files
+ignore/
+Main.pdf

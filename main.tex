@@ -1,0 +1,862 @@
+%% 
+%% Copyright 2007-2025 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+\documentclass[final,1p,times,twocolumn,numbers]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsmath package provides various useful equation environments.
+\usepackage{amsmath}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+\usepackage{float}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+\usepackage{nameref}
+\usepackage{hyperref, graphicx, wrapfig, booktabs, svg}
+\usepackage{bm}
+\usepackage{makecell}
+\usepackage[dvipsnames]{xcolor}
+
+% \newcommand{\firstround}{\color{blue}}
+% \newcommand{\secondround}{\color{Red}}
+% \newcommand{\thirdround}{\color{ForestGreen}}
+
+\newcommand{\firstround}{\color{black}}
+\newcommand{\secondround}{\color{black}}
+\newcommand{\thirdround}{\color{black}}
+
+\journal{NPJ}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
+%% \fntext[label3]{}
+
+\title{Physics Constrained Graph Neural Network for Real Time Prediction of Intracranial Aneurysm Hemodynamics} %% Article title
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+\author[1]{Vincent Lannelongue} 
+\author[1]{Paul Garnier} 
+\author[1]{Pablo Jeken-Rico} 
+\author[1]{Aurèle Goetz} 
+\author[1]{Philippe Meliga} 
+\author[2]{Yves Chau} 
+\author[1]{Elie Hachem}\corref{{cor1}}
+\ead{elie.hachem@minesparis.psl.eu}
+
+
+\cortext[cor1]{Corresponding author}
+
+%%ead[url]{https://cure-erc.github.io/}%%
+
+%% Author affiliation
+\affiliation[1]{organization={Mines Paris - PSL, University Centre for Material Forming (CEMEF) CNRS},
+            country={France}}
+
+\affiliation[2]{
+    organization={Interventional Neuroradiology Department, Nice University Hospital},
+    city={Nice},
+    postcode={06100}, 
+    state={Alpes-Maritimes},
+    country={France}
+}
+
+
+%% Abstract
+\begin{abstract}
+%% Text of abstract
+Intracranial aneurysms (IAs) are life-threatening vascular conditions requiring accurate risk assessment to guide treatment. Hemodynamic biomarkers such as wall shear stress and oscillatory shear index are promising predictors of rupture risk but remain underused clinically due to the high computational cost of traditional CFD methods. We propose a physics-constrained graph neural network (GNN) framework trained on high-fidelity CFD data to predict full 3D, time-resolved hemodynamic fields throughout the cardiac cycle. Our model incorporates enhanced node features and physics-based constraints to capture complex spatio-temporal flow behavior in near real time. It generalizes to varying inflow conditions and unseen patient-specific geometries with no fine-tuning. Additionally, we release a benchmark dataset of 105 patient-derived aneurysm geometries with CFD fields to support the machine learning (ML) community. This is the first GNN model applied to transient 3D aneurysmal flow prediction, paving the way for rapid, AI-driven hemodynamic analysis toward risk stratification and treatment planning.
+\end{abstract}
+
+%%Graphical abstract
+% \begin{graphicalabstract}
+% %\includegraphics{grabs}
+% \end{graphicalabstract}
+
+% %%Research highlights
+% \begin{highlights}
+% \item Research highlight 1
+% \item Research highlight 2
+% \end{highlights}
+
+%% Keywords
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+Graph Neural Networks \sep Intracranial Aneurysms 
+\sep hemodynamics \sep Computational Fluid Dynamics \sep Machine Learning
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% Add \usepackage{lineno} before \begin{document} and uncomment 
+%% following line to enable line numbers
+%% \linenumbers
+
+%% main text
+%%
+% \textit{The colors indicate the \firstround first round, \secondround second round \color{black} and \thirdround third round \color{black} of review.}
+% \vspace{-17pt}
+
+\section*{Introduction}
+
+% Usual aneurysm intro, need for new methods (faster for medical routine)
+Intracranial aneurysms (IAs) are pathological dilations of cerebral arteries, most frequently found in the Circle of Willis, that affect approximately 2–3\% of the population. These aneurysms pose a significant clinical challenge due to their potential to rupture, resulting in subarachnoid hemorrhage, a condition with a case fatality rate over 30\% \cite{vlak_prevalence_2011, nieuwkamp_changes_2009}. Current clinical decisions regarding aneurysm management rely heavily on static, macroscopic metrics such as size, shape, and location, along with patient-specific factors like age and hypertension history \cite{baharoglu_identification_2012}. However, these metrics have limited reliability in predicting rupture risk, often leading to inconclusive or contradictory assessments \cite{xiang_hemodynamicmorphologic_2011}.
+
+Recent advances in computational methods and imaging technologies have enabled the modeling of aneurysmal blood flow, highlighting hemodynamic biomarkers such as wall shear stress (WSS), oscillatory shear index (OSI), and intra-aneurysmal pressure gradients as key determinants of rupture risk \cite{xiang_hemodynamicmorphologic_2011}. Computational fluid dynamics (CFD) has been instrumental in providing high-fidelity, patient-specific hemodynamic simulations \cite{zhou_association_2017, xiang_cfd_2014}. Despite its utility, the prohibitive computational cost, time-intensive setup, and specialized expertise required for CFD limit its integration into clinical workflows, where timely decision-making is critical.
+
+In parallel, artificial intelligence (AI) and machine learning (ML) methods have demonstrated transformative potential across a range of neurovascular interventions, as evidenced by their application in device tracking during endovascular procedures. For instance, real-time AI-assisted platforms like Neuro-Vascular Assist (iMed technologies, Tokyo, Japan) have improved precision and reduced cognitive load during interventions such as aneurysm coiling and liquid embolization \cite{sakakura_realtime_2024, sakakura_pioneering_2024}, demonstrating the clinical feasibility of AI-driven decision support. Inspired by these successes, researchers have begun exploring ML-based surrogates for CFD, aiming to achieve accurate, near-instantaneous predictions of hemodynamics \cite{arzani_machine_2022}. Traditional ML approaches have largely relied on convolutional neural networks (CNNs) due to their effectiveness in image-based tasks. While CNNs have shown promise in predicting certain hemodynamic parameters from 2D or simplified 3D data \cite{gharleghi_transient_2022, ferdian_wssnet_2022, rutkowski_enhancement_2021}, their reliance on structured grids makes them ill-suited for the complex, unstructured nature of aneurysm geometries. This limitation is particularly patent when attempting to model the intricate, three-dimensional flow patterns critical to understanding aneurysm pathophysiology. 
+
+Graph neural networks (GNNs) provide a compelling alternative by leveraging the graph-like structure of CFD domains, enabling the direct processing of irregular, non-Euclidean data. Going beyond point cloud-based methods like PointNet and PointNet++\cite{charles_pointnet_2017, qi_pointnet_2017} which have been tested on simplified geometries and stationary hemodynamics predictions\cite{li_prediction_2021_1, suk_physics-informed_2024}, GNNs rely on message passing mechanisms to iteratively update unstructured graphs, and efficiently learn local patterns.  
+
+Recent studies have demonstrated the efficiency of GNNs in predicting 2D time-dependent flows, steady-state 3D flows, and external flows around simple geometries, particularly in physics-driven tasks involving partial differential equations and numerical simulation \cite{pfaff_learning_2021, hernandez_thermodynamics-informed_2024, lam_graphcast_2023, li_physics-constrained_2024, gladstone_gnn-based_2023, pelissier_graph_2024}. To the best of our knowledge, while GNNs have been used in biomedical blood flow and hemodynamic studies \secondround\cite{sen_physics_2024, suk_mesh_2024, pegolotti_learning_2024, feiger_accelerating_2020, li_prediction_2021_2, liang_feasibility_2020}\color{black}, their application to time-dependent 3D blood flow predictions with intricate vortex and swirling patterns within intracranial aneurysms remains an unexplored frontier. 
+
+This work introduces a novel framework that integrates CFD-trained, physics-constrained graph neural networks (GNNs) to predict full 3D, time-resolved hemodynamic fields for intracranial aneurysms throughout the cardiac cycle. To enhance the accuracy of capturing complex spatio-temporal dynamics, the framework incorporates physics-based embedding laws and constraints directly into the learning process. Additionally, it leverages detailed node feature enhancements within the graph representation, enabling precise modeling of intricate hemodynamic variations. Therefore, the proposed learning-prediction framework achieves a balance between computational efficiency and accuracy, addressing the need for high-fidelity simulations while meeting the immediacy required for clinical applications. \firstround To further validate the generalizability of our approach, we perform two inference experiments on out-of-distribution cases: new inflow profiles unseen during training, and four fully patient-specific aneurysm geometries. These results highlight the model’s robustness and its potential as a transferable foundation for future clinical extensions. \color{black} Finally, to support the broader research community, we introduce a comprehensive dataset comprising 105 patient-specific aneurysm geometries coupled with high-resolution CFD simulations, referred to as BenchAnXplore. Unlike existing datasets, which often suffer from limited size or heterogeneity, this dataset enables standardized evaluation of ML models in aneurysm modeling. 
+
+This work lays the foundation for future clinical applications with significant potential impact. Indeed, real-time prediction of hemodynamics could support future advances in rupture risk assessment, enable more personalized treatment planning \cite{hachem_reinforcement_2023}, assist in optimizing interventions such as flow diverters or coiling \cite{chong_multicenter_2019}, and accelerate long-term simulations of intracranial aneurysm healing \cite{pelissier2025continuum}. Moreover, the introduction of a comprehensive benchmark dataset helps address a major limitation in the field, the scarcity of large-scale, high-quality training data for ML models. By integrating modern ML architectures with domain-specific knowledge, this study contributes a foundational step toward a new generation of AI-assisted neurovascular modeling. It lays the groundwork for future innovations in clinical decision support, with the long-term goal of improving outcomes for patients with intracranial aneurysms.
+
+\section*{Results}
+\subsection*{Dataset} \label{sec:dataset}
+The dataset consists of 105 aneurysm 3D meshes, created by intersecting an ideal half torus with aneurysm bulges extracted from patient cases in the \textit{IntrA} dataset \cite{yang_intra_2020}, following Goetz et al. methodology \cite{goetz_anxplore_2024}. \firstround We refer to them as semi-idealized geometries, as they combine an idealized toroidal parent artery with a patient-specific aneurysm bulge, as illustrated in \autoref{fig:anxplore}.
+
+These chosen geometries represent sidewall aneurysms located on the internal carotid artery (ICA), particularly near the ICA siphon. This choice is motivated by its clinical representativeness: the ICA siphon region is a common site for aneurysm formation and is frequently modeled in hemodynamic studies due to its characteristic curvature \citep{ramalho_influence_2013}. Several prior works have highlighted the ICA’s susceptibility to aneurysm development at curved segments due to altered flow patterns and wall shear stress concentrations \cite{sunderland_disturbed_2022}. Notably, the siphon’s curvature is often approximated as toroidal, making the torus-shaped backbone both anatomically justified and reproducible across computational settings. \color{black}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\textwidth, trim={150 250 250 250}, clip]{nf/Figure01.png}
+    \caption{Dataset of 105 semi-idealised patient-specific geometries \cite{goetz_anxplore_2024} with 10 highlighted test cases.}
+    \label{fig:anxplore}
+\end{figure}
+
+\firstround The bulges range from 3 to 9 mm in diameter, covering diverse pathological shapes and the selected vessel diameter in our dataset is 4 mm, which aligns with clinical measurements of the ICA in adult patients typically ranging from 3–6 mm \cite{baz_morphometry_2021}. 
+
+\thirdround We generated the \textbf{BenchAnXplore} dataset following the meshing, coarsening and simulation processes further detailed in the \nameref{sec:Methods} section, and obtained 105 aneurysm geometries, with 80 simulated timeframes for each of these cases. This dataset is now made available as a benchmark case for AI intracranial aneurysms applications. \color{black}
+
+
+\subsection*{Training} \label{sec:training}
+We trained and compared four models to evaluate the impact of node feature enhancement and physically-informed improvements separately. To ensure a fair comparison, all models were trained using the same configuration. \firstround All MLPs (multilayer perceptrons) used for encoders, decoders and update functions within the GN blocks, have two hidden layers of 128 neurons each, \secondround and use a ReLU activation function. \color{black} We used 15 rounds of message passing, bringing the total number of parameters to approximately 3 million.
+
+With 105 simulations, each spanning 80 timesteps, we trained on 95 simulations and randomly selected 10 for testing and evaluation (highlighted in red in \autoref{fig:anxplore}). This test set gathers a wide variety in shapes and flow characteristics as depicted in \autoref{fig:test_set}. Given that our meshes contain in average 20,000 nodes, this results in over 75 million training tokens. Recall that number of training tokens is equal to trajectories * timesteps * data points.
+
+%  Our model having approximately 290k trainable parameters, the number 
+We trained for 20 epochs e.g. 144k training steps, using a fixed learning rate \secondround of $10^{-4}$ \color{black} for 16 epochs followed by 4 epochs with exponential decay \secondround to reach a minimum learning rate of $10^{-7}$. \color{black}Training was conducted on L4 NVIDIA GPUs, taking approximately 20 hours, with a slight ($\sim 5$\%) increase for the physically informed network due to gradient computations.
+
+% flops calculation :
+% nb of training tokens = 80t * 91traj * 10k nodes = 72.8 millions
+% flops = training tokens * 290k params = 2.1e13
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.70\textwidth, trim={620 0 700 50}, clip]{nf/Figure02.png}
+    \caption{Test set of 10 representative blood flow CFD simulations.}
+    \label{fig:test_set}
+\end{figure}
+
+\paragraph{Boundary conditions} To handle boundary conditions over the domain, we added a node type as an input feature to separate different training behaviors according to the considered nodes. We fixed a null velocity for the wall nodes and did not compute loss nor performed learning onto these nodes. The velocity at the inlet nodes was fixed; we imposed the same pulsatile parabolic inflow profile as in the ground-truth CFD simulations. All other nodes of the fluid domain, outflow included, were used to train the network.
+
+\paragraph{Training noise} Our models are trained for 1-step prediction tasks but are intended to be used in a "rollout" scenario, where they iteratively use their own predictions to generate an entire simulation. In such scenarios, the model's input data can deviate from the training distribution due to errors introduced in previous steps. This deviation amplifies errors over successive iterations, resulting in cumulative inaccuracies throughout the simulation. Following the same strategy as \cite{sanchez-gonzalez_learning_2020}, we introduced noise to all our dynamical variables during training to enhance the robustness of our models. 
+
+\paragraph{Timestep} To simplify training and eliminate temporal ambiguity, we fixed the training timestep to 0.01 s, which is coarser than the CFD solver’s timestep of 0.001 s. This was done intentionally to reduce sequence length while maintaining temporal coherence. As such, the model is not required to generalize to arbitrary time horizons. While we did not test interpolation across multiple timestep sizes, the current design is adequate for clinical use cases where a consistent frame rate is expected. \color{black}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{nf/Figure03.pdf}
+    \caption{Evaluation cases with \textbf{(a)}: cases chosen from our testing dataset for deeper analysis; \textbf{(b)}: pulsatile inflow rate, with 3 chosen time frames for evaluation; \textbf{(c)}: slice and points used for velocity data extraction.}
+    \label{fig:eval_cases}
+\end{figure}
+
+\subsection*{Numerical performance}
+
+We evaluated all four models on the full test set for both next-step and rollout prediction with 1-step and 50-step Root Mean Square Errors (RMSE) as described in the \nameref{sec:Methods} section; mean errors over all test cases are given in \autoref{tab:model-configurations}. While all models perform well on next-step prediction, as shown by the 1-step error in \autoref{tab:model-configurations}, significant differences emerge in rollout prediction in particular at time $t_2$ as clearly highlighted in  \autoref{fig:model_comparison}. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.05\textwidth]{nf/Figure04.pdf}
+\caption{Rollout predictions at time $t_2$ for all trained models.}
+\label{fig:model_comparison}
+\end{figure}
+
+Indeed, the In-MGN and In-PI-MGN models produce high-quality rollouts, with the 50-step error for In-PI-MGN being more than six times lower than the MGN baseline. In-MGN also performs well on longer predictions, whereas introducing the physical loss alone does not improve long-term prediction performance. Both MGN and PI-MGN models converge for single-step predictions but struggle with error accumulation in rollout predictions. 
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{l c c c c c}
+        \toprule
+        \textbf{Model} & \textbf{Input features} & \textbf{Loss function} & \textbf{1-RMSE} & \textbf{50-RMSE} & \firstround \textbf{50-RMSE SD}\color{black}\\
+        \midrule \midrule
+        \text{MGN} & $u$ & $\mathcal{L}_{data}$ & 1.11 & 50.51 & \firstround 1.43\color{black}\\
+        \text{PI-MGN} & $u$ & $\mathcal{L}_{PI}$ & \textit{1.06} & 55.62 & \firstround 1.27\color{black}\\
+        \text{In-MGN} & $u$, $du/dt$, inflow & $\mathcal{L}_{data}$ & 1.09 & \textit{9.22} & \firstround 1.47\color{black}\\
+        \text{In-PI-MGN} & $u$, $du/dt$, inflow & $\mathcal{L}_{PI}$ & \textbf{0.85} & \textbf{7.58} & \firstround 1.02\color{black}\\
+        \bottomrule
+    \end{tabular}
+    \caption{Model configurations and performance. \firstround Errors averaged on the test set over the whole geometry; next step prediction (1-RMSE) and rollout predictions (50-RMSE) errors are given in mm/s. The standard deviation (SD) of the 50-RMSE across the test set cases is also displayed. Best results are displayed in \textbf{bold}; second best in \textit{italic}}
+    \label{tab:model-configurations}
+\end{table}
+
+
+\begin{figure}[!ht]
+    \firstround
+    \centering
+     \includegraphics[width=0.3\textwidth]{nf/Figure05.pdf}
+    \caption{Split of our geometries at planes $y=8.5$ mm and $y=7$ mm to evaluate RMSE metrics in three anatomically regions: the aneurysm bulge (blue), the neck (red) and the parent artery (green).}
+    \label{fig:anev_regions}
+\end{figure}
+
+\firstround Because all geometries share the same parent artery, averaging the errors over the entire domain may obscure localized variations in model performance. To better assess the predictive accuracy of each model, we computed the 1-step and 50-step RMSEs separately across three anatomically distinct regions: the aneurysm bulge, the neck, and the distal segment of the parent artery (see \autoref{fig:anev_regions}). The results for all four models are summarized in \autoref{tab:results_region}, confirming the same overall tendencies observed in the global error metrics. \color{black}
+
+% \begin{figure}[!ht]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{figures/aneurysm_regions.pdf}
+% \caption{Split of our geometries at planes $y = 8.5$ and $y=7$ to evaluate RMSE metrics in three regions: the aneurysm bulge (blue), the neck (red) and the parent artery (green).}
+% \label{fig:model_comparison}
+% \end{figure}
+
+\begin{table}[ht]
+    \firstround
+    \centering
+    \begin{tabular}{l c c c}
+        \toprule
+        \textbf{Model} & \textbf{Bulge 1-RMSE} & \textbf{Neck 1-RMSE} & \textbf{Artery 1-RMSE}\\
+        \midrule \midrule
+        \text{MGN} & 1.22 & 1.63 & 0.91 \\
+        \text{PI-MGN} & 1.14 & \textit{1.31} & 0.92 \\
+        \text{In-MGN} & \textit{1.11} & 1.47 & \textit{0.83} \\
+        \text{In-PI-MGN} & \textbf{0.68} & \textbf{1.16} & \textbf{0.74} \\
+        
+        \midrule
+        \textbf{Model} & \textbf{Bulge 50-RMSE} & \textbf{Neck 50-RMSE} & \textbf{Artery 50-RMSE}\\
+        \midrule \midrule
+        \text{MGN} & 38.16 & 62.25 & 51.77 \\
+        \text{PI-MGN} & 44.88 & 66.01 & 57.87 \\
+        \text{In-MGN} & \textit{18.28} & \textit{10.66} & \textbf{4.62} \\
+        \text{In-PI-MGN} & \textbf{11.87} & \textbf{8.38} & \textit{4.66} \\
+        \bottomrule
+    \end{tabular}
+    \caption{1-RMSE and 50-RMSE in mm/s averaged across the test set on the different regions of the geometries. Best results are displayed in \textbf{bold}; second best in \textit{italic}.}
+    \label{tab:results_region}
+\end{table}
+
+\firstround To assess the individual impact of acceleration and inflow information on model performance, we conducted an ablation study as part of our experiments. The results showed that adding inflow features alone improved both training convergence and long-term rollout predictions, whereas adding acceleration without inflow features did not lead to model convergence. This suggests that local temporal history is insufficient for accurate prediction in the absence of global context. The combination of both inflow and acceleration features yielded the best performance in terms of error metrics and qualitative agreement with CFD fields. \color{black}
+
+
+
+Figures \ref{fig:streamlines_time} and \ref{fig:streamlines_case_c} show a temporal analysis of the full geometry volume. It clearly demonstrate that GNN predictions are closely aligned with ground truth CFD simulations, even during the systolic phase, where velocity fluctuations are pronounced. Additionally, the model effectively captures the evolution of recirculation within the aneurysm bulge. To assess the model’s performance across a diverse range of flow characteristics and bulge shapes, velocity predictions were generated for the entire test set, as illustrated in \autoref{fig:test_comparison}. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.98\textwidth]{nf/Figure06.pdf}
+    \caption{Blood flow during systole for Case B, showing predictions closely matching simulations throughout the acceleration phase}
+    \label{fig:streamlines_time}
+\end{figure}
+
+Quantitative comparisons at the aneurysm neck (\autoref{fig:slice_1}) demonstrate good agreement in predicted flow dynamics, particularly where high-velocity jets interact with the aneurysm wall. Velocity measurements at evaluation points (\autoref{fig:point_velocity_comparison}) further illustrate model accuracy. While the baseline MGN model deviates significantly from the ground truth after a few timesteps, both inflow enhanced In-MGN and In-PI-MGN maintain an error margin within 5\% for most of the cardiac cycle at $p_{neck}$ and $p_{out}$. Predictions at $p_{wall}$ are less precise for In-MGN and exhibit some delay, whereas In-PI-MGN remains closely aligned with the ground truth, particularly after systole.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.98\textwidth]{nf/Figure07.pdf}
+    \caption{Blood flow during systole for Case C, demonstrating accurate predictions in a larger, more asymmetrical aneurysm bulge.}
+    \label{fig:streamlines_case_c}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=1\textwidth]{nf/Figure08.pdf}
+\caption{Velocity fields comparison for the whole test set at time $t_2$.}
+\label{fig:test_comparison}
+\end{figure}
+
+Beyond velocity evaluation, WSS results derived from velocity fields were also analyzed by comparing TAWSS in the aneurysm bulge for the In-PI-MGN model and the ground truth, as shown in \autoref{fig:tawss} and \autoref{fig:time_wss}. The prediction error remains within 10\% across the entire test set, demonstrating strong agreement between predicted and reference patterns. Finally, instant WSS and space-averaged WSS (SAWSS) were examined in \autoref{fig:sawss} to track WSS variations throughout the cardiac cycle. The SAWSS curves indicate that while the In-MGN model follows the general trend, the In-PI-MGN model exhibits the closest match to the reference, particularly in capturing peak values and transient dynamics. The WSS plots at our three evaluation timesteps confirm again the accuracy of the model pattern prediction over the cardiac cycle.
+
+\firstround Furthermore, in order to evaluate the ability of the model to conserve mass, we conducted quantitative mass flow analyses at multiple cross-sectional planes along the artery, as displayed in \autoref{fig:massflow}. Specifically, we measured the instantaneous volumetric flow rates at the inlet, the outlet, and at two additional intermediate planes normal to the centerline of the parent artery. These measurements were performed across the full cardiac cycle for both the CFD ground truth and the In-PI-MGN model predictions.
+
+The results are presented in \autoref{fig:massflow} illustrating the flow rates across the geometry for both the ground truth and the predicted velocity fields. The mean difference between inlet and outlet flow rates for ground truth and prediction are 2.3\% and 3.7\% respectively, with maximums across the cardiac cycle at 2.9\% and 5.2\%. These results further support that the model captures not only the spatial and temporal dynamics of blood flow but also also respects core physical laws such as continuity. \color{black}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\textwidth]{nf/Figure09.pdf}
+    \caption{Blood velocity comparison at the aneurysm neck; displayed error is normalized by maximum ground-truth velocity at the given timestep. Maximum error is occurring at high speed flow regions close to the wall, and remains below 8\%.}
+    \label{fig:slice_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{nf/Figure10.pdf}
+\caption{Velocity evolution plotted over time for Case A.}
+\label{fig:point_velocity_comparison}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{nf/Figure11.pdf}
+    \caption{TAWSS magnitude plotted on the aneurysm bulge, and relative error normalized by maximum ground-truth TAWSS. Error is thresholded to mask errors under 5\%; maximum local error is at 9\%.}
+    \label{fig:tawss}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{nf/Figure12.pdf}
+    \caption{WSS plotted over the aneurysm bulge at different timeframes for Case B.}
+    \label{fig:time_wss}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.1\textwidth]{nf/Figure13.pdf}
+\caption{SAWSS computed over the aneurysm bulge for all 3 test cases.}
+\label{fig:sawss}
+\end{figure}
+
+
+\begin{figure}[H]
+\firstround
+\centering
+\includegraphics[width=1.1\textwidth]{nf/Figure14.pdf}
+\caption{Comparison of mass flow on different cross-sections of evaluation case C.}
+\label{fig:massflow}
+\end{figure}
+
+\secondround 
+\subsection*{Generalization to unseen cases}
+\color{black}
+
+In order to evaluate the generalization capability of the model trained solely on semi-idealized geometries, we conducted two experiments without any additional fine-tuning. Indeed, the proposed GNN framework operates entirely on local mesh and flow features rather than relying on global geometry descriptors, therefore, it is essential to assess its ability to adapt to new settings, provided the underlying physics and boundary conditions remain comparable.
+
+First, we examined the model’s robustness to unseen inflow rates. We ran new CFD simulations on our three test cases using alternative inflow velocity time profiles from ICA and middle cerebral artery (MCA) as well, derived from the literature \cite{Hoi2011, Reymond2009}, shown in \autoref{fig:inflow_profiles}. When evaluated on these six new inflow conditions (with no retraining), the model achieved a 1-step RMSE of 2.4 and a 50-step RMSE of 14.3. Velocity field comparisons in \autoref{fig:slices_inflow} confirm that predictions remain close to the ground truth, despite never encountering these inflow profiles during training. This result demonstrates the model’s adaptability to physiologically realistic variations in inflow dynamics, even though it was trained on a single fixed profile.
+
+\begin{figure}[!ht]
+\firstround
+\centering
+\includegraphics[width=0.6\textwidth]{nf/Figure15.png}
+\caption{Different inflow rates derived from patient-specific ICA and MCA data \cite{Hoi2011, Reymond2009}.}
+\label{fig:inflow_profiles}
+\end{figure}
+
+\begin{figure}[!ht]
+\firstround
+\centering
+\includegraphics[width=1\textwidth]{nf/Figure16.pdf}
+\caption{Blood velocity comparison at the aneurysm neck on unseen velocity profiles.}
+\label{fig:slices_inflow}
+\end{figure}
+
+\secondround 
+
+Second, we tested the model on four zero-shot predictions on out-of-distribution, patient-specific aneurysm geometries. These new cases were randomly selected from our internal database and exhibit a range of morphological variations, including aneurysm location, parent vessel diameter, neck size, aneurysm sac diameter, and centerline length. Their geometrical features are further described in \autoref{tab:0-shot_cases} and highlight the difference of these cases from the BenchAnXplore training and testing data.
+
+Remarkably, the In-PI-MGN model trained only on synthetic semi-idealized geometries was able to reproduce realistic flow behaviors in this complex clinical scenario. While the predicted velocity fields show discrepancies in order-of-magnitude for cases 3 and 4, the predicted velocity fields match the CFD ground truth in spatial distribution in all cases as shown in \autoref{fig:real_cases}. 
+
+\begin{table}[ht]
+    \centering
+    {\secondround \begin{tabular}{l c c c c c}
+        \toprule
+        \textbf{Case} & \small{\textbf{Location}} & \makecell{\small{\textbf{Inlet}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Aneurysm}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Aneurysm neck}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Centerline}}\\ \small{\textbf{Length}}}\\
+        \midrule \midrule
+        \textbf{Case 1} & \text{ICA} & 4.8 & 4.5  & 4.2 & 49.1  \\
+        \textbf{Case 2} & \text{MCA} & 2.5 & 6.0  & 5.2 & 23.2  \\
+        \textbf{Case 3} & \text{MCA} & 2.7 & 7.8  & 7.3 & 21.4  \\
+        \textbf{Case 4} & \text{ICA} & 4.3 & 15.0 & 8.7 & 65.5  \\
+        \midrule \midrule
+        \small{\textbf{BenchAnXplore}} & ICA & 4.0 & 3 - 9 & 3.2 & 25.6 \\
+        \bottomrule
+    \end{tabular}}
+    \caption{\secondround Zero-shot cases geometrical description with aneurysm location, inlet artery diameter, aneurysm diameter, aneurysm neck diameter and artery centerline length from inlet to furthest outlet, all in mm. The BenchAnXplore values are given as a comparison.\color{black}}
+    \label{tab:0-shot_cases}
+\end{table}
+
+% \begin{table}[ht]
+%     \centering
+%     {\thirdround \begin{tabular}{l c c}
+%         \toprule
+%         \textbf{Case} & \small{\textbf{1-RMSE}} & \small{\textbf{50-RMSE}}\\
+%         \midrule \midrule
+%         \textbf{Case 1} & 2.76 & 65.41   \\
+%         \textbf{Case 2} & 0.80 & 45.77  \\
+%         \textbf{Case 3} & 2.42 & 68.14  \\
+%         \textbf{Case 4} & 3.75 & 117.64  \\
+%         \midrule \midrule
+%         \small{\textbf{BenchAnXplore}} & 0.85 & 7.58 \\
+%         \bottomrule
+%     \end{tabular}}
+%     \caption{\thirdround Model performance on zero-shot cases. The BenchAnXplore test set values are given as a comparison.\color{black}}
+%     \label{tab:0-shot_errors}
+% \end{table}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=1\textwidth]{nf/Figure17.pdf}
+\caption{\secondround Zero-shot predictions on out-of-distribution patient-specific ICA and MCA aneurysm cases.}
+\label{fig:real_cases}
+\end{figure}
+
+\color{black}
+
+\section*{Discussion}
+
+Our results demonstrate that In-PI-MGN, a physics-constrained graph neural network, can accurately predict spatio-temporal blood flow fields across a diverse range of 3D aneurysmal geometries. The model maintains close agreement with CFD ground truth while offering significant computational gains. The model can simulate 80 timesteps in under a minute, whereas traditional CFD methods require approximately one hour for the same task. Even accounting for the 20-hour training time, the proposed approach becomes more efficient after just 20 simulations. \firstround Including dataset generation, the total model development time amounts to approximately 70 hours. \color{black} This leap in speed could be critical in clinical decision support, especially for time-sensitive or resource-constrained contexts.
+
+Indeed, the ability to produce fast full-field hemodynamic predictions opens new possibilities for simulation-augmented clinical workflows. For instance, rupture risk assessments or device deployment planning could benefit from immediate feedback, without the delays of traditional CFD. We foresee this approach contributing to preoperative planning, follow-up monitoring, and even in-room guidance during interventional neuroradiology.
+
+Our contributions are threefold. First, we tackle the challenge of predicting transient, non-Newtonian 3D blood flow, with the ability to accurately capture the evolution of recirculation and swirling patterns, within complex aneurysmal geometries, an area previously unexplored with GNNs. Second, we introduce two architectural advances: contextual inflow feature enhancement to improve long-range temporal representation, and physics-informed training to promote stability and physical plausibility across time. Third, we release BenchAnXplore, a large-scale benchmark dataset of 105 intracranial aneurysm geometries with matched CFD simulations, establishing a new standard for AI-based hemodynamics research.
+
+Prior ML-based approaches for hemodynamic modeling have mostly focused on reduced-order representations, simplified vascular segments, or static features \secondround \cite{pegolotti_learning_2024, li_prediction_2021_1, sen_physics_2024}\color{black}. Our work departs from this by directly learning spatio-temporal dynamics from full 3D velocity fields across realistic geometries. Leveraging the expressive capabilities of GNNs, our model captures complex flow behavior—including swirling and recirculation—within topologically diverse aneurysm shapes. The integration of physics-informed loss terms and contextual inflow features marks a methodological advance, enabling accurate long-term rollout and reducing error accumulation.
+
+\secondround 
+Furthermore, we have confronted our method to out-of-distribution unseen cases with different inflow rates and patient-specific cases, and observed that our model had obtained generalization capabilities and was able to uncover realistic flow patterns with no additional training. \color{black} These preliminary results highlight the potential of our approach as a foundation for future fine-tuning toward patient-specific clinical applications.
+
+In summary, this work offers a reproducible, extensible framework that brings high-fidelity hemodynamic inference closer to real-time clinical use. By enabling rapid hemodynamic inference with strong physical consistency, this work paves the way for real-time risk assessment, personalized treatment planning, and simulation-augmented clinical workflows. It offers a reproducible and extensible step toward bridging high-fidelity fluid mechanics and deep learning in cerebrovascular medicine.
+
+\secondround  However, several important limitations remain before clinical deployment can be fully realized. First and foremost, the proposed model is trained on idealized vessel geometries. Clinical routine is characterized by a wide variety of anatomical presentations in terms of size, shape, and orientation. As highlighted by the promising yet degraded performance of our model on out-of-distribution patient-specific cases \thirdround (e.g., average 50-step relative velocity error on the four cases of 11\% compared to 1.6\% on the original test set), \secondround generalization to clinical settings requires training on representative data. While our current dataset is varied and complex enough to serve as a valuable benchmark for model evaluation, it represents only a first step toward patient-specific hemodynamics prediction. In future work, this will need to be complemented by a larger collection of patient-derived geometries or the generation of more realistic synthetic cases.
+
+
+Second, our CFD ground-truth simulations were generated using a single, temporally and spatially idealized inflow profile. We have demonstrated the model’s ability to generalize across different inflow time profiles, even when these were not part of the training data. Although these inflow rates are widely used in CFD studies of intracranial aneurysms~\cite{cebral_characterization_2005, larrabide_change_2015, lu_hemodynamics_2025}, they remain statistical means extracted from literature~\cite{Reymond2009, Hoi2011}, and may not reflect true patient-specific variability. It would be highly valuable to extend this approach to include clinically acquired Doppler ultrasound or 4D Flow MRI inflow profiles. Additionally, all inlet profiles in this study are prescribed as idealized parabolic flows, which—while common~\cite{qian_risk_2011, larrabide_change_2015, lu_hemodynamics_2025}, omit higher-order effects captured in more realistic Womersley profiles~\cite{cebral_characterization_2005}. Fortunately, previous studies have shown that aneurysmal flow patterns remain robust across such inlet assumptions when appropriate domain lengths are used~\cite{saalfeld_flow-splitting-based_2019}. Nonetheless, we aim to integrate 4D Flow MRI-derived boundary conditions in future work~\cite{brindise_multi-modality_2019}, both for fine-tuning and evaluating our model under more realistic conditions.
+
+
+
+Lastly, we acknowledge that while hemodynamic quantities such as wall shear stress (WSS) and oscillatory shear index (OSI) are commonly studied, a biomarker strongly correlated with intracranial aneurysm rupture risk remains elusive. The interpretation of these biomarkers, including proposed thresholds for risk stratification, continues to be debated within the scientific and medical communities. While the primary objective of this work is not direct rupture prediction, it is important to clarify that our model outputs are intended to serve as high-fidelity, physics-consistent inputs to further risk analysis, not as standalone diagnostic tools. We see this as a step toward augmenting clinical decision-making by providing accessible, real-time flow field estimation, which can be combined with other risk factors to support informed diagnostic. \color{black}
+
+Building on this foundation, future work may explore advanced architectures such as multigrid GNNs \cite{garnier_multi-grid_2024}, which enable hierarchical information flow across mesh scales, and attention-based GNNs, which enhance the model’s ability to prioritize key flow structures. These approaches could enable higher-resolution predictions while preserving computational efficiency, further advancing AI-driven hemodynamic modeling. \firstround Moreover, while we demonstrate zero-shot generalization on both unseen inflow profiles and a fully patient-specific case, we emphasize the need for further validation on larger, more heterogeneous clinical datasets, to support further research. \color{black}
+
+\section*{Methods} \label{sec:Methods}
+
+\subsection*{Graph Neural Networks} \label{sec:gnn}
+
+GNNs are a class of neural networks working on sets of vertices and edges. Through different deep learning techniques such as convolution (Graph Convolutional Networks) \cite{kipf_semi-supervised_2017}, attention (Graph Attention Networks) \cite{velickovic_graph_2018} or recurrent layers (Graph Recurrent Networks) \cite{ruiz_gated_2020}, they exploit message passing mechanisms to learn the relations between neighboring nodes, and have shown great performances in many area of physics \secondround \cite{janny_eagle_2023, gladstone_gnn-based_2023, lam_graphcast_2023, garnier_meshmask_2025, lin_up-sampling-only_2024}\color{black}.
+
+Solving complex systems of partial differential equations, such as the Navier-Stokes equations, often requires mesh-based discretisation of the computational domain. These meshes are typically adapted to enhance numerical accuracy in critical regions while minimizing computational cost in less challenging areas \cite{coupez_solution_2013}. However, traditional deep-learning architectures, such as convolutional, recurrent, or fully connected layers, struggle to effectively handle the anisotropic and irregular nature of meshes. They either fail to capture local dependencies properly or do so at a prohibitive computational expense. Building on the founding that the deep-learning toolbox layers did not offer the possibility of learning arbitrary relations between elements of a set with relational structure such as a graph, Battaglia et al. \cite{battaglia_relational_2018} introduced the Graph Network (GN) layer, aiming to create a general framework for graph computation. Inspired from Message Passing Neural Networks \cite{gilmer_neural_2017} among others, this layer is designed to take a graph as input, process the graph with any subsequent model such as a neural network but not necessarily, and return a graph, using the nodes as entities with features, edges as relations between entities, and global attributes over the whole graph. 
+
+We note an undirected graph $G = (V, E)$ with $V$ a set of vertices with $V = \{v_i\}_{i \in N^v}$ vertices attributes and $E$ a set of edges with $e_{ij}$ linking vertices with indexes $i, j$.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{nf/Figure18.pdf}
+    \caption{Graph network updating edges (left) and nodes (right)}
+    \label{fig:GN_updates}
+\end{figure}
+
+The GN updates edges attributes with an edge-update function $\varphi_E$, gathers a vertex neighborhood information by aggregating the updated edges connected to it with an aggregation function $\rho$, and updates the vertex with a vertex-update function $\varphi_V$ (\autoref{fig:GN_updates}). Because the update functions are shared over every nodes and edges, graph networks are adapted to learn local physical behavior over every relation in the graph. We purposefully left out global graph attributes here to avoid unnecessary complications of the framework, as we will not be using them.
+
+\begin{align} \label{eq:GN}
+    \tilde{e}_{ij} &= \varphi_E(e_{ij}, v_i, v_j) \nonumber\\
+    \tilde{e}_i &= \rho(\{ \tilde{e}_{ij} \}_j) \\
+    \tilde{v}_i &= \varphi_V(v_i, \tilde{e}_i) \nonumber
+\end{align}
+
+with $\tilde{e_{ij}}$ being the updated edge attributes from the initial edge attributes and the connected vertices attributes, $\tilde{e}_i$ being the aggregated information of all edges linked to vertex $i$, and $\tilde{v}_i$ being the updated vertex attributes from the initial vertex attributes and the aggregated neighborhood information.
+
+
+\subsection*{MeshGraphNet - GNNs for physics simulations} \label{sec:mgn}
+
+Numerical physics simulations like CFD relies on meshes. Pfaff et al. \cite{pfaff_learning_2021} took advantage of this data structure and built a GNN model using physical meshes as inputs, designed for next-step prediction in physical problems such as flow field prediction around a cylinder or a wing profile. With the mesh information at $t$ (and potentially $t-1$), the trained network can predict the physical fields at $t+1$. By inferring on its own predictions, the network can predict a whole simulation with only a few timesteps to infer from; the MeshGraphNet (MGN) model have achieved state of the art results, being able to predict the temporal evolution of these systems during significant time periods while remaining coherent with the physical simulations. The MGN model learns the system's forward dynamics with an encode-process-decode architecture (\autoref{fig:epd}), using multilayer perceptrons (MLPs).
+
+\paragraph{Encoder} The encoder extracts all input features for nodes and edges from the graph $G_t$, which is derived from the mesh at time $t$. These features include physical properties such as velocity, pressure or stress, as well as geometrical attributes like edge lengths and node positions. \secondround The node and edge features are respectively encoded into latent spaces by the encoder MLP's $\epsilon_V$ and $\epsilon_E$ into latent spaces of size 128, as graph nodes $v_i$ and edges $e_{ij}$, to constitute the latent space graph $Q_t$. \color{black}
+
+
+\paragraph{Processor} The processor then performs rounds of message passing by applying $L$ several successive GN layers. For each round of message passing, each node of the graph sends messages to its neighbors, which consist of the encoded and processed node’s and edge’s feature information. As in the GN layer described in Subsection \nameref{sec:gnn}, the neighbors aggregate and process these messages to gain a collective understanding of their local neighborhood, to update their own feature representation. This allows them to incorporate the new information received from their neighbors and refine their own states. \secondround Each of these GN layers has update functions $\varphi_E$ and $\varphi_V$ respectively for edges and nodes, as described in \autoref{eq:GN}. These functions are MLPs as well, with different sets of parameters for each GN layer, and the edge aggregation function $\rho$ is an element-wise summation\color{black}. Performing several consecutive rounds of message passing allows the GNN to infer the evolution of the graph with information circulating over the whole domain, and to return an updated latent space graph $Q_{t+1}$ \secondround with updated node and edge latent vectors $\tilde{v}_i$ and $\tilde{e}_{ij}$\color{black}. 
+
+\paragraph{Decoder} Finally, \secondround the decoder translates the processed node vectors contained in the latent space updated graph $Q_{t+1}$ with a final MLP $\delta_V$ \color{black} to a physical update, which is added to the input mesh in order to get the next-step physical mesh $G_{t+1}$ with updated physical fields. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{nf/Figure19.pdf}
+    \caption{Encode-process-decode (EPD) architecture \cite{pfaff_learning_2021} for velocity $U_{t+1}$ prediction from $U_t$.}
+    \label{fig:epd}
+\end{figure}
+
+All the underlying processing and updating functions here are ReLU-activated 2 hidden-layer MPLs. The model learns the physical behavior by minimizing the differences between its predictions and the ground truth data computed with numerical solver, with a data loss being the mean square error, for a given physical quantity $a$:
+
+\begin{equation} \label{eq:loss_data}
+    \mathcal{L}_{data} = \underset{v \in V}{\mathrm{mean}} \ \vert \vert a_v - \tilde{a_v} \vert \vert^2_2
+\end{equation}
+with $a_v$ being the ground truth and $\tilde{a_v}$ the prediction at node $v$.
+
+\subsection*{Hemodynamics simulations} \label{sec:blood_flow}
+
+The MeshGraphNet model has demonstrated excellent performance in predicting flow in 2D settings for benchmark fluid dynamics problems, such as incompressible steady flow around a cylinder and compressible flow around an airfoil. However, its ability to generalize to blood flow predictions in a three-dimensional environment remains an unexplored frontier and requires further investigation. 
+
+The CFD numerical framework used in hemodynamics simulations provide fully resolved velocity $u$ and pressure $p$ fields on the whole 3D domain by solving the mixed formulation of the transient incompressible Navier–Stokes equations given by:
+
+\begin{align} \label{eq:NS}
+    \rho (\partial_t u +  u \cdot \nabla u) &= -\nabla p + \nabla \cdot (2 \mu \epsilon (u)) \nonumber \\
+    \nabla \cdot u &= 0
+\end{align}
+with $\rho$ the fluid density, $\epsilon (u)$ the strain rate tensor and $\mu$ the fluid viscosity. Blood exhibits a non-Newtonian rheology a shear-thinning behavior that can be described with constitutive models such as the Casson or the Carreau-Yasuda law \cite{lynch_effects_2022}:
+
+\begin{equation} \label{eq:carreau_yasuda}
+    \mu(\dot\gamma) = \mu_{\infty} + (\mu_0-\mu_{\infty})(1+(\tau \dot\gamma)^a)^{\frac{n-1}{a}}     
+\end{equation}
+with the relaxation time $\tau$, power indices $n$ and $a$, and asymptotic values of the effective viscosity $\mu(\dot\gamma)$, $\mu_0$ and $\mu_{\infty}$, at zero and infinite shear-rates, respectively, being known fluid constants.
+
+\firstround At the inlet of the fluid domain, we impose a physiologically realistic pulsatile mass flow profile corresponding to one full cardiac cycle, derived from ICA measurements as reported in the literature \cite{ford_characterization_2005}. The velocity profile is applied as a fully developed parabolic inflow condition. To ensure smooth initialization of the simulation, the cardiac waveform is preceded by a 0.2 s linear ramp-up. The simulation spans two full cardiac cycles of 0.8 s each, with the first cycle serving as transient initialization. This waveform corresponds to a cardiac cycle of 0.8 seconds and was scaled to produce a peak systolic flow rate of approximately 6 mL/s, which, given the 4 mm vessel diameter, yields a peak Reynolds number of approximately 400. This flow regime is consistent with reported physiological conditions in the internal carotid artery \secondround \cite{Hoi2011, ford_characterization_2005, ramalho_influence_2013, baz_morphometry_2021}\color{black}. Note that only the second cycle is retained for analysis to ensure periodic flow has been reached. At the outlet, we apply a resistive boundary condition to emulate the downstream vasculature. The resistance is tuned to maintain a physiological pressure variation of approximately 40 mmHg over the cardiac cycle, consistent with clinical observations for ICA outflow and guided by known systolic and diastolic flow rates. The vessel walls are modeled as rigid with a no-slip boundary condition, hence zero velocity is imposed at all wall-adjacent nodes. This is a standard assumption in many CFD studies of intracranial aneurysms, particularly when the primary interest lies in evaluating flow patterns and shear-related biomarkers rather than wall compliance. \color{black}
+
+Several quantities of interest have been identified for risk assessment and treatment decision for unruptured intracranial aneurysms. Obtaining these quantities by post-processing the simulated velocity fields inside the aneurysm is of great interest for clinical routine, and is a key feature expected from CFD frameworks for hemodynamics. Among these hemodynamical quantities is the wall shear stress (WSS), defined here as:
+
+\begin{equation} \label{eq:wss}
+    \tau = n \times [(\sigma \cdot n) \times n] = \sigma \cdot n - [(\sigma \cdot n) \cdot n]n
+\end{equation}
+where $\bm{n}$ is the unit normal vector at the wall and $\bm{\sigma}$ is the Cauchy stress tensor defined as $\sigma = -p I + \mu (\nabla u + \nabla^T u)$.
+
+This framework unveils a higher level of complexity compared to benchmark fluid dynamics cases on which MGN was evaluated. The shift to 3D adds significant intricacy to the observed flow patterns, and increases the size of the meshes. Additionally, the geometries at hand in a medical context are derived from real patients, making them inherently more intricate and variable compared to synthetic or benchmark models. Moreover, blood rheology can be considered in hemodynamics simulations, needing to account for non-Newtonian fluid properties and their effects on flow behavior. This adds another layer of complexity as blood exhibits varying viscosity under different flow conditions as shown in \autoref{eq:carreau_yasuda}. Finally, the inflow conditions in blood flow studies follow a pulsatile cardiac cycle, which introduces time-dependent variations that must be accurately captured to understand the hemodynamics accurately. This pulsatile nature requires a deeper understanding of hemodynamics by the model to simulate the rhythmic changes in blood flow and pressure.
+
+For a GNN-based CFD surrogate approach to be justified, the GNN counterpart to traditional numerical solvers needs to produce local physical spatio-temporal fields in a relatively thin margin of error from the CFD ground truth outputs, with a significant reduction in computing time.
+
+
+\thirdround
+\subsection*{Dataset generation} \label{sec:dataset_details}
+\color{black}
+
+For each of the 105 semi-idealized aneurysm geometries, numerical fluid simulations were performed following the general fluid mechanics problem formulated in the previous subsection, with a 0.001s timestep. All the geometries hemodynamics were simulated using the velocity profile derived from \cite{ford_characterization_2005}. The simulations ran in on in-house finite-element C++ based library by solving a mixed formulation of the incompressible Navier-Stokes equations (\autoref{eq:NS}) using a variational multiscale (VMS) method, as described by Hachem et al. \cite{hachem_stabilized_2010}. \color{black}
+
+The dataset meshes were generated with refined boundary layers around the artery walls to accurately compute velocity gradients during the CFD simulations. The resulting meshes are composed of around 200k nodes each, which translates to about 1M element.
+
+In order to build a reproducible experiment with a versatile dataset, we derived a lighter version of the dataset, allowing us to test many configurations with a reasonable computational resources and time. This lighter dataset was generated using an automated pipeline. \firstround Starting from the high-resolution CFD meshes with refined boundary layers, we extracted the outer surface of each vascular geometry and re-meshed it using isotropic triangular elements. These surfaces were then used to generate volumetric meshes consisting of unstructured tetrahedral elements with uniform resolution, using an average target element size of 0.3 mm. This mesh size was selected based on a trade-off between physical fidelity and computational efficiency, after experimenting with multiple mesh resolutions, ranging from 0.15 mm to 0.4 mm. 
+
+No boundary layer refinement was applied in the light dataset, as our aim was to reduce memory requirements and allow rapid GNN training iterations. To populate these lighter meshes with flow data, we applied linear interpolation of the full-resolution CFD velocity and pressure fields onto the new node sets. To validate the accuracy of this interpolation procedure, we performed round-trip interpolation experiments: interpolated flow fields from the fine mesh were mapped onto the coarse mesh and then back onto the original fine mesh. The resulting discrepancies in both velocity and pressure fields remained below a few percent across the domain, confirming the adequacy of the remeshing and interpolation steps for surrogate modeling. \color{black}
+
+With this framework, meshes with under 25k nodes and 120k elements were automatically generated, resulting in a dataset of 105 aneurysm geometries, with 80 simulated timeframes for each of these cases, with a 0.01 s timestep. The obtained dataset, referred as \textbf{BenchAnXplore} dataset, is now made available as a benchmark case for AI intracranial aneurysms applications. 
+
+By working on this lighter dataset, we were able to increase our model size, train much faster and run several experiments in reasonable time; training one epoch of our models on the original dataset took around 40 times longer than on the lighter dataset (respectively 20 hours and 30 minutes on a NVIDIA A100 GPU). 
+
+
+\subsection*{Node feature enhancement with contextual inflow information - In-GNN} \label{sec:inflow}
+
+We designed our model using the MeshGraphNet (MGN) model \cite{pfaff_learning_2021} presented in Subsection \nameref{sec:mgn} as a baseline to build upon, and to assess our obtained results. This baseline model uses the velocity field at time $t$ as input, and returns the velocity update for time $t+1$. However, several challenges arise compared to prior GNN applications that have largely focused on 2D scenarios, steady-state 3D flows, or external flow problems around simpler geometries. This work directly confronts the formidable challenges posed by the highly non-linear, pulsatile nature of blood flow within the 3D complex, irregular, and patient-derived geometries of aneurysms.  Indeed, the dynamics of the whole domain are deeply linked with the pulsatile nature of the inlet flow, but information from the inflow would need many rounds of message passing to reach every node of our mesh with the raw MGN architecture, fed on velocity data. Following the lines in Gladstone et al. \cite{gladstone_gnn-based_2023} who faced the problem of long-range interaction in time-dependent mechanical problem, we fed our network with additional information by adding statistical information about the inflow acceleration at $t+1$ to every node of the mesh, as the boundary conditions at the inlet are known beforehand.
+
+This allowed the whole domain to grasp the evolution of the inflow dynamics whilst trying to predict the velocity at $t+1$, without adding layers of message passing which would have made the model heavier. Moreover, we also added the acceleration between timesteps $t-1$ and $t$ as a node feature to give more local temporal history to the model.
+
+\firstround For the baseline MGN model, the node feature vector is composed of the following concatenated quantities:
+\begin{itemize}
+    \item Velocity (3 components)
+    \item Spatial position (3 components)
+    \item Timestamp (1 component)
+    \item Node type (1-hot encoded: inlet, wall, interior, outlet)
+\end{itemize}
+
+For our model, we enrich this vector by adding:
+\begin{itemize}
+
+    \item Local acceleration computed as the velocity difference between $t$ and $t+1$ (3 components)
+    \item Inflow context vector: mean, minimum, and maximum velocity magnitude of inlet nodes at $t+1$ (3 components)
+\end{itemize}
+
+The edge feature vector, consistent across all models, contains:
+\begin{itemize}
+    \item The relative coordinate vector between connected nodes (3 components)
+    \item The Euclidean distance (1 component)
+\end{itemize}
+\color{black}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{nf/Figure20.pdf}
+    \caption{Model architecture - the input meshes and inflow data are exploited to create a feature graph, from which our GNN model can predict the next step mesh, taking into account physical and data losses combined during model training.}
+    \label{fig:model}
+\end{figure}
+
+
+\subsection*{Physically-constrained GNN} \label{sec:pinn}
+
+\firstround Although the model is trained on datasets generated by an in-house numerical solver that computes solutions to the Navier-Stokes equations (see Subsection \nameref{sec:dataset}), the integration of physical knowledge into the training process can enhance the accuracy and reliability of its predictions. This approach aligns with the principles outlined in physics-informed machine learning, which has been shown to improve predictive performance by embedding domain-specific laws and constraints directly into the learning framework \cite{raissi_physics-informed_2019}.
+ 
+ Moreover, data-only based learning approach can lack robustness to out-of-distribution cases. To enhance the performances of our model, we added a physics-based regularization through the addition of a more physically relevant loss (PI-GNN) by Suk et al. \cite{suk_physics-informed_2024}. \color{black}
+ 
+Thus, we approximated differentiable operators in a discrete vector field using finite differences over the neighborhood of nodes, thereby preventing training slowdowns caused by gradient computations. These gradients are computed locally within each cell neighborhood on the mesh, which helps preserve topological consistency even in geometrically complex zones. 
+
+With $u_i$ the velocity vector at node $n_i \in N$, $\mathcal{N}_i$ the collection of its direct neighbors and $x_i$ its position, we can approximate the gradient of $u_i$ with:
+ 
+\begin{equation} \label{eq:gradient}
+    \nabla u_i \approx \frac{1}{\mathcal{N}_i} \sum_{j \in \mathcal{N}_i} \frac{(u_j - u_i)(x_j - x_i)^T}{||x_j - x_i||_2^2}
+\end{equation}
+Following the same method, we can write the conservation of mass using the discrete approximation of the divergence:
+
+\begin{equation}
+    \nabla \cdot u_i = \frac{\partial u_{i,x}}{\partial x} +\frac{\partial u_{i,y}}{\partial y} + \frac{\partial u_{i,z}}{\partial z} = 0 \quad \text{thus} \quad \nabla \cdot u_i \approx \frac{1}{\mathcal{N}_i} \sum_{j \in \mathcal{N}_i} \frac{(u_j - u_i) \cdot (x_j - x_i)}{||x_j - x_i||_2^2}
+\end{equation}
+Furthermore, we evaluate the convective term $u \cdot \nabla u$ and the viscous term $\mu \Delta u$ using the following approximation of the Laplacian operator:
+
+\begin{equation}
+        \Delta u \approx \frac{1}{\mathcal{N}_i} \sum_{j \in \mathcal{N}_i} \frac{(\nabla u_j - \nabla u_i)(x_j - x_i)^T}{||x_j - x_i||_2^2}
+\end{equation}
+
+Using these approximations, we developed a physical loss function to augment our training by incorporating not only the discrepancies between predicted and ground truth velocities, but also a deeper understanding of the fundamental principles of fluid mechanics. This approach enables us to calculate a continuity loss based on the conservation of mass, as well as convective and viscous losses, which quantify the errors in the convective and viscous terms, respectively (\autoref{eq:NS}): 
+
+
+\begin{align} \label{eq:loss_phy}
+    \mathcal{L}_{continuity} &= \underset{v \in V}{\mathrm{mean}} \ \vert  (\nabla \cdot u)_v \vert \\
+    \mathcal{L}_{convection} &= \underset{v \in V}{\mathrm{mean}} \ \vert \vert \rho u_v \nabla u_v - \rho \tilde{u_v} \nabla \tilde{u_v} \vert \vert^2_2 \\
+    \mathcal{L}_{viscous} &= \underset{v \in V}{\mathrm{mean}} \ \vert \vert \mu \Delta u_v - \mu \Delta \tilde{u_v} \vert \vert^2_2
+\end{align}
+
+To mitigate the importance of each loss term during training, we combined the data and physical terms in a properly tuned weighted loss, \thirdround as following: 
+
+\begin{equation}
+    \mathcal{L}_{PI} = \mathcal{L}_{data} + \alpha \mathcal{L}_{continuity} + \beta \mathcal{L}_{convection} + \gamma \mathcal{L}_{viscosity}
+\end{equation}
+
+with $\alpha$, $\beta$ and $\gamma$ being scaling factors. We tuned our weighted loss by evaluating the physical loss terms during the first epochs of training the data-only equivalent models, to adjust the scaling factors in order to get comparable scales for each contributor of the global loss. The data loss term was given a weight of 0.5, while the remaining physics-informed terms were equally distributed over the remaining 0.5. While the continuity term stabilizes after only one epoch, the convection and viscosity losses decrease steadily during the whole training along side with the data loss, providing a faster model convergence. \color{black}
+
+
+
+\thirdround
+\subsection*{Evaluation metrics}
+\color{black}
+
+\firstround To compare the performances of our models, we computed the L2 norm of the velocity error, and with this error the Root Mean Square Error (RMSE) averaged across case geometry. We used the 1-RMSE to evaluate the next-step predictions of our model, as well as the 50-RMSE on a rollout prediction to determine the robustness of the model on full trajectory predictions, as formulated in \autoref{eq:rmse}. We displayed these errors, averaged on the test set, in \autoref{tab:model-configurations}, as well as the standard deviation of the 50-step RMSE to evaluate the stability of the models on different test cases. These errors are in mm/s, and the values reported in \autoref{tab:model-configurations} are absolute errors, not normalized by maximum velocity. \color{black}
+
+\begin{equation}\label{eq:rmse} 
+\firstround
+\begin{split}
+    1\textrm{-RMSE} &= \sqrt{\frac{\sum_i^N (y_i^t - f(x^{t-1})_i)^2)}{N}}\\
+    T\textrm{-RMSE} &= \frac{1}{T}\sum_t^T \sqrt{ \frac{\sum_i^N (y_i^t - f^t(x^0)_i)^2)}{N} }
+\end{split}
+\end{equation}
+
+\thirdround Three representative cases were randomly chosen from the 10 test cases while guaranteeing coverage of three bulge sizes. Three key timesteps were also selected along the cardiac cycle as shown in  \autoref{fig:eval_cases}, to represent the systolic, peak systole and diastolic phases. \color{black}We computed WSS as well as time-averaged WSS (TAWSS) as defined in \nameref{sec:Methods} to further analyze the predictions capability of the models needed for risk assessment. \secondround All WSS-based quantities were derived directly from the velocity fields, and were not interpolated from the finer cases. \color{black}We also plotted the aneurysm neck plane to show the velocity of the flow entering and exiting the bulge, as well as on three selected points along the full cardiac cycle to show the velocity evolution inside the neck, the outflow artery and close to the bulge wall, as shown in \autoref{fig:eval_cases}. The mentioned velocity and WSS errors are normalized by the ground truth maximum at a given timestep; because of the highly dynamic nature of the flow, normalizing by the overall maximum value would highly reduce the error on every timestep far from the peak systole. 
+
+\secondround
+\section*{Data availability} 
+The datasets used and analyzed during the current study are available at the following link: \url{https://storage.googleapis.com/large-physics-model/datasets/aneurysm/coarse_03_dataset.zip}
+
+\firstround
+\section*{Code availability} 
+The underlying code for this study are available from the corresponding author upon reasonable request. \secondround The custom code used for data generation and visualization are relying solely on open-source Python libraries and are available from the corresponding author upon reasonable request as well.
+
+\firstround
+\section*{Acknowledgement}
+
+The author(s) declare that financial support was received for the research, authorship, and/or publication of this article. European Union (ERC, CURE, 101045042). The views and opinions expressed are, however, those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them.
+
+\section*{Author contributions}
+
+V. L.: conceptualization, formal analysis, study design, investigation, data curation, software development, methodology, database generation, validation, visualization, writing original draft, review and editing. P.G, P.J.R. and A.G: contributed to software development, database generation, methodology and review. P.M.: contributed to study design, data interpretation, and drafting. Y.C.: provided clinical perspectives to the study, in addition to critically reviewing the manuscript. E.H.: developed the project concept and design, conceptualization, formal analysis, study design, investigation, software development, methodology, validation, visualization, writing original draft, review, editing, secured funding, and revised the manuscript for important intellectual content.
+
+
+\section*{Competing interests}
+
+The authors declare no competing interests.
+
+\color{black}
+% % _______________________
+% %% Use \section commands to start a section
+% \section{Example Section}
+% \label{sec1}
+% %% Labels are used to cross-reference an item using \ref command.
+
+% Section text. See Subsection \ref{subsec1}.
+
+% %% Use \subsection commands to start a subsection.
+% \subsection{Example Subsection}
+% \label{subsec1}
+
+% Subsection text.
+
+% %% Use \subsubsection, \paragraph, \subparagraph commands to 
+% %% start 3rd, 4th and 5th level sections.
+% %% Refer following link for more details.
+% %% https://en.wikibooks.org/wiki/LaTeX/Document_Structure#Sectioning_commands
+
+% \subsubsection{Mathematics}
+% %% Inline mathematics is tagged between $ symbols.
+% This is an example for the symbol $\alpha$ tagged as inline mathematics.
+
+% %% Displayed equations can be tagged using various environments. 
+% %% Single line equations can be tagged using the equation environment.
+% \begin{equation}
+% f(x) = (x+a)(x+b)
+% \end{equation}
+
+% %% Unnumbered equations are tagged using starred versions of the environment.
+% %% amsmath package needs to be loaded for the starred version of equation environment.
+% \begin{equation*}
+% f(x) = (x+a)(x+b)
+% \end{equation*}
+
+% %% align or eqnarray environments can be used for multi line equations.
+% %% & is used to mark alignment points in equations.
+% %% \\ is used to end a row in a multiline equation.
+% \begin{align}
+%  f(x) &= (x+a)(x+b) \\
+%       &= x^2 + (a+b)x + ab
+% \end{align}
+
+% \begin{eqnarray}
+%  f(x) &=& (x+a)(x+b) \nonumber\\ %% If equation numbering is not needed for a row use \nonumber.
+%       &=& x^2 + (a+b)x + ab
+% \end{eqnarray}
+
+% %% Unnumbered versions of align and eqnarray
+% \begin{align*}
+%  f(x) &= (x+a)(x+b) \\
+%       &= x^2 + (a+b)x + ab
+% \end{align*}
+
+% \begin{eqnarray*}
+%  f(x)&=& (x+a)(x+b) \\
+%      &=& x^2 + (a+b)x + ab
+% \end{eqnarray*}
+
+% %% Refer following link for more details.
+% %% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+% %% https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics
+
+% %% Use a table environment to create tables.
+% %% Refer following link for more details.
+% %% https://en.wikibooks.org/wiki/LaTeX/Tables
+% \begin{table}[t]%% placement specifier
+% %% Use tabular environment to tag the tabular data.
+% %% https://en.wikibooks.org/wiki/LaTeX/Tables#The_tabular_environment
+% \centering%% For centre alignment of tabular.
+% \begin{tabular}{l c r}%% Table column specifiers
+% %% Tabular cells are separated by &
+%   1 & 2 & 3 \\ %% A tabular row ends with \\
+%   4 & 5 & 6 \\
+%   7 & 8 & 9 \\
+% \end{tabular}
+% %% Use \caption command for table caption and label.
+% \caption{Table Caption}\label{fig1}
+% \end{table}
+
+
+% %% Use figure environment to create figures
+% %% Refer following link for more details.
+% %% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+% \begin{figure}[t]%% placement specifier
+% %% Use \includegraphics command to insert graphic files. Place graphics files in 
+% %% working directory.
+% \centering%% For centre alignment of image.
+% \includegraphics{example-image-a}
+% %% Use \caption command for figure caption and label.
+% \caption{Figure Caption}\label{fig1}
+% %% https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Importing_external_graphics
+% \end{figure}
+
+
+% %% The Appendices part is started with the command \appendix;
+% %% appendix sections are then done as normal sections
+% \appendix
+% \section{Example Appendix Section}
+% \label{app1}
+
+% Appendix text.
+
+% %% For citations use: 
+% %%       \citet{<label>} ==> Lamport (1994)
+% %%       \citep{<label>} ==> (Lamport, 1994)
+% %%
+% Example citation, See \citet{lamport94}.
+
+%% If you have bib database file and want bibtex to generate the
+%% bibitems, please use
+%%
+%%  \bibliographystyle{elsarticle-harv} 
+%%  \bibliography{<your bibdatabase>}
+
+ \bibliographystyle{unsrt}
+ \bibliography{references}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+%% Refer following link for more details about bibliography and citations.
+%% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+
+% \begin{thebibliography}{00}
+
+%% For authoryear reference style
+%% \bibitem[Author(year)]{label}
+%% Text of bibliographic item
+
+% \bibitem[Lamport(1994)]{lamport94}
+%   Leslie Lamport,
+%   \textit{\LaTeX: a document preparation system},
+%   Addison Wesley, Massachusetts,
+%   2nd edition,
+%   1994.
+
+% \end{thebibliography}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
+
+
