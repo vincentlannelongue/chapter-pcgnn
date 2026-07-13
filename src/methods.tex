@@ -1,80 +1,20 @@
-\subsection*{Graph Neural Networks} \label{sec:gnn}
 
-GNNs are a class of neural networks working on sets of vertices and edges. Through different deep learning techniques such as convolution (Graph Convolutional Networks) \cite{kipf_semi-supervised_2017}, attention (Graph Attention Networks) \cite{velickovic_graph_2018} or recurrent layers (Graph Recurrent Networks) \cite{ruiz_gated_2020}, they exploit message passing mechanisms to learn the relations between neighboring nodes, and have shown great performances in many area of physics \secondround \cite{janny_eagle_2023, gladstone_gnn-based_2023, lam_graphcast_2023, garnier_meshmask_2025, lin_up-sampling-only_2024}\color{black}.
-
-Solving complex systems of partial differential equations, such as the Navier-Stokes equations, often requires mesh-based discretisation of the computational domain. These meshes are typically adapted to enhance numerical accuracy in critical regions while minimizing computational cost in less challenging areas \cite{coupez_solution_2013}. However, traditional deep-learning architectures, such as convolutional, recurrent, or fully connected layers, struggle to effectively handle the anisotropic and irregular nature of meshes. They either fail to capture local dependencies properly or do so at a prohibitive computational expense. Building on the founding that the deep-learning toolbox layers did not offer the possibility of learning arbitrary relations between elements of a set with relational structure such as a graph, Battaglia et al. \cite{battaglia_relational_2018} introduced the Graph Network (GN) layer, aiming to create a general framework for graph computation. Inspired from Message Passing Neural Networks \cite{gilmer_neural_2017} among others, this layer is designed to take a graph as input, process the graph with any subsequent model such as a neural network but not necessarily, and return a graph, using the nodes as entities with features, edges as relations between entities, and global attributes over the whole graph. 
-
-We note an undirected graph $G = (V, E)$ with $V$ a set of vertices with $V = \{v_i\}_{i \in N^v}$ vertices attributes and $E$ a set of edges with $e_{ij}$ linking vertices with indexes $i, j$.
-
-\todo{Make figure from tikz}
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figs/message_passing.pdf}
-    \caption{Graph network updating edges (left) and nodes (right)}
-    \label{fig:GN_updates}
-\end{figure}
-
-The GN updates edges attributes with an edge-update function $\varphi_E$, gathers a vertex neighborhood information by aggregating the updated edges connected to it with an aggregation function $\rho$, and updates the vertex with a vertex-update function $\varphi_V$ (\autoref{fig:GN_updates}). Because the update functions are shared over every nodes and edges, graph networks are adapted to learn local physical behavior over every relation in the graph. We purposefully left out global graph attributes here to avoid unnecessary complications of the framework, as we will not be using them.
-
-\begin{align} \label{eq:GN}
-    \tilde{e}_{ij} &= \varphi_E(e_{ij}, v_i, v_j) \nonumber\\
-    \tilde{e}_i &= \rho(\{ \tilde{e}_{ij} \}_j) \\
-    \tilde{v}_i &= \varphi_V(v_i, \tilde{e}_i) \nonumber
-\end{align}
-
-with $\tilde{e_{ij}}$ being the updated edge attributes from the initial edge attributes and the connected vertices attributes, $\tilde{e}_i$ being the aggregated information of all edges linked to vertex $i$, and $\tilde{v}_i$ being the updated vertex attributes from the initial vertex attributes and the aggregated neighborhood information.
-
-
-\subsection*{MeshGraphNet - GNNs for physics simulations} \label{sec:mgn}
-
-Numerical physics simulations like CFD relies on meshes. Pfaff et al. \cite{pfaff_learning_2021} took advantage of this data structure and built a GNN model using physical meshes as inputs, designed for next-step prediction in physical problems such as flow field prediction around a cylinder or a wing profile. With the mesh information at $t$ (and potentially $t-1$), the trained network can predict the physical fields at $t+1$. By inferring on its own predictions, the network can predict a whole simulation with only a few timesteps to infer from; the MeshGraphNet (MGN) model have achieved state of the art results, being able to predict the temporal evolution of these systems during significant time periods while remaining coherent with the physical simulations. The MGN model learns the system's forward dynamics with an encode-process-decode architecture (\autoref{fig:epd}), using multilayer perceptrons (MLPs).
-
-\paragraph{Encoder} The encoder extracts all input features for nodes and edges from the graph $G_t$, which is derived from the mesh at time $t$. These features include physical properties such as velocity, pressure or stress, as well as geometrical attributes like edge lengths and node positions. \secondround The node and edge features are respectively encoded into latent spaces by the encoder MLP's $\epsilon_V$ and $\epsilon_E$ into latent spaces of size 128, as graph nodes $v_i$ and edges $e_{ij}$, to constitute the latent space graph $Q_t$. \color{black}
-
-
-\paragraph{Processor} The processor then performs rounds of message passing by applying $L$ several successive GN layers. For each round of message passing, each node of the graph sends messages to its neighbors, which consist of the encoded and processed node’s and edge’s feature information. As in the GN layer described in Subsection \nameref{sec:gnn}, the neighbors aggregate and process these messages to gain a collective understanding of their local neighborhood, to update their own feature representation. This allows them to incorporate the new information received from their neighbors and refine their own states. \secondround Each of these GN layers has update functions $\varphi_E$ and $\varphi_V$ respectively for edges and nodes, as described in \autoref{eq:GN}. These functions are MLPs as well, with different sets of parameters for each GN layer, and the edge aggregation function $\rho$ is an element-wise summation\color{black}. Performing several consecutive rounds of message passing allows the GNN to infer the evolution of the graph with information circulating over the whole domain, and to return an updated latent space graph $Q_{t+1}$ \secondround with updated node and edge latent vectors $\tilde{v}_i$ and $\tilde{e}_{ij}$\color{black}. 
-
-\paragraph{Decoder} Finally, \secondround the decoder translates the processed node vectors contained in the latent space updated graph $Q_{t+1}$ with a final MLP $\delta_V$ \color{black} to a physical update, which is added to the input mesh in order to get the next-step physical mesh $G_{t+1}$ with updated physical fields. 
-
-\begin{figure}[!ht]
-    \centering
-    \resizebox{0.8\textwidth}{!}{\input{tikz/epd.tex}}
-    \caption{Encode-process-decode (EPD) architecture \cite{pfaff_learning_2021} for velocity $U_{t+1}$ prediction from $U_t$.}
-    \label{fig:epd}
-\end{figure}
-
-All the underlying processing and updating functions here are ReLU-activated 2 hidden-layer MPLs. The model learns the physical behavior by minimizing the differences between its predictions and the ground truth data computed with numerical solver, with a data loss being the mean square error, for a given physical quantity $a$:
-
-\begin{equation} \label{eq:loss_data}
-    \mathcal{L}_{data} = \underset{v \in V}{\mathrm{mean}} \ \vert \vert a_v - \tilde{a_v} \vert \vert^2_2
-\end{equation}
-with $a_v$ being the ground truth and $\tilde{a_v}$ the prediction at node $v$.
+\todo{Give precisions on model size and architecture}
 
 \subsection*{Hemodynamics simulations} \label{sec:blood_flow}
 
 The MeshGraphNet model has demonstrated excellent performance in predicting flow in 2D settings for benchmark fluid dynamics problems, such as incompressible steady flow around a cylinder and compressible flow around an airfoil. However, its ability to generalize to blood flow predictions in a three-dimensional environment remains an unexplored frontier and requires further investigation. 
 
-The CFD numerical framework used in hemodynamics simulations provide fully resolved velocity $u$ and pressure $p$ fields on the whole 3D domain by solving the mixed formulation of the transient incompressible Navier–Stokes equations given by:
+\todo{refer to Methods chapter for hemodynamics simulations settings}
 
-\begin{align} \label{eq:NS}
-    \rho (\partial_t u +  u \cdot \nabla u) &= -\nabla p + \nabla \cdot (2 \mu \epsilon (u)) \nonumber \\
-    \nabla \cdot u &= 0
-\end{align}
-with $\rho$ the fluid density, $\epsilon (u)$ the strain rate tensor and $\mu$ the fluid viscosity. Blood exhibits a non-Newtonian rheology a shear-thinning behavior that can be described with constitutive models such as the Casson or the Carreau-Yasuda law \cite{lynch_effects_2022}:
-
-\begin{equation} \label{eq:carreau_yasuda}
-    \mu(\dot\gamma) = \mu_{\infty} + (\mu_0-\mu_{\infty})(1+(\tau \dot\gamma)^a)^{\frac{n-1}{a}}     
-\end{equation}
-with the relaxation time $\tau$, power indices $n$ and $a$, and asymptotic values of the effective viscosity $\mu(\dot\gamma)$, $\mu_0$ and $\mu_{\infty}$, at zero and infinite shear-rates, respectively, being known fluid constants.
-
-\firstround At the inlet of the fluid domain, we impose a physiologically realistic pulsatile mass flow profile corresponding to one full cardiac cycle, derived from ICA measurements as reported in the literature \cite{ford_characterization_2005}. The velocity profile is applied as a fully developed parabolic inflow condition. To ensure smooth initialization of the simulation, the cardiac waveform is preceded by a 0.2 s linear ramp-up. The simulation spans two full cardiac cycles of 0.8 s each, with the first cycle serving as transient initialization. This waveform corresponds to a cardiac cycle of 0.8 seconds and was scaled to produce a peak systolic flow rate of approximately 6 mL/s, which, given the 4 mm vessel diameter, yields a peak Reynolds number of approximately 400. This flow regime is consistent with reported physiological conditions in the internal carotid artery \secondround \cite{Hoi2011, ford_characterization_2005, ramalho_influence_2013, baz_morphometry_2021}\color{black}. Note that only the second cycle is retained for analysis to ensure periodic flow has been reached. At the outlet, we apply a resistive boundary condition to emulate the downstream vasculature. The resistance is tuned to maintain a physiological pressure variation of approximately 40 mmHg over the cardiac cycle, consistent with clinical observations for ICA outflow and guided by known systolic and diastolic flow rates. The vessel walls are modeled as rigid with a no-slip boundary condition, hence zero velocity is imposed at all wall-adjacent nodes. This is a standard assumption in many CFD studies of intracranial aneurysms, particularly when the primary interest lies in evaluating flow patterns and shear-related biomarkers rather than wall compliance. \color{black}
-
+\todo{move WSS definition either methods or intro}
 Several quantities of interest have been identified for risk assessment and treatment decision for unruptured intracranial aneurysms. Obtaining these quantities by post-processing the simulated velocity fields inside the aneurysm is of great interest for clinical routine, and is a key feature expected from CFD frameworks for hemodynamics. Among these hemodynamical quantities is the wall shear stress (WSS), defined here as:
 
 \begin{equation} \label{eq:wss}
     \tau = n \times [(\sigma \cdot n) \times n] = \sigma \cdot n - [(\sigma \cdot n) \cdot n]n
 \end{equation}
 where $\bm{n}$ is the unit normal vector at the wall and $\bm{\sigma}$ is the Cauchy stress tensor defined as $\sigma = -p I + \mu (\nabla u + \nabla^T u)$.
+
 
 This framework unveils a higher level of complexity compared to benchmark fluid dynamics cases on which MGN was evaluated. The shift to 3D adds significant intricacy to the observed flow patterns, and increases the size of the meshes. Additionally, the geometries at hand in a medical context are derived from real patients, making them inherently more intricate and variable compared to synthetic or benchmark models. Moreover, blood rheology can be considered in hemodynamics simulations, needing to account for non-Newtonian fluid properties and their effects on flow behavior. This adds another layer of complexity as blood exhibits varying viscosity under different flow conditions as shown in \autoref{eq:carreau_yasuda}. Finally, the inflow conditions in blood flow studies follow a pulsatile cardiac cycle, which introduces time-dependent variations that must be accurately captured to understand the hemodynamics accurately. This pulsatile nature requires a deeper understanding of hemodynamics by the model to simulate the rhythmic changes in blood flow and pressure.
 
@@ -140,25 +80,12 @@ The edge feature vector, consistent across all models, contains:
  
  Moreover, data-only based learning approach can lack robustness to out-of-distribution cases. To enhance the performances of our model, we added a physics-based regularization through the addition of a more physically relevant loss (PI-GNN) by Suk et al. \cite{suk_physics-informed_2024}. \color{black}
  
-Thus, we approximated differentiable operators in a discrete vector field using finite differences over the neighborhood of nodes, thereby preventing training slowdowns caused by gradient computations. These gradients are computed locally within each cell neighborhood on the mesh, which helps preserve topological consistency even in geometrically complex zones. 
+Thus, we approximated differentiable operators in a discrete vector field using gradient computation methods over unstructured graphs \todo{Reference to Methods}. 
 
-With $u_i$ the velocity vector at node $n_i \in N$, $\mathcal{N}_i$ the collection of its direct neighbors and $x_i$ its position, we can approximate the gradient of $u_i$ with:
- 
-\begin{equation} \label{eq:gradient}
-    \nabla u_i \approx \frac{1}{\mathcal{N}_i} \sum_{j \in \mathcal{N}_i} \frac{(u_j - u_i)(x_j - x_i)^T}{||x_j - x_i||_2^2}
-\end{equation}
-Following the same method, we can write the conservation of mass using the discrete approximation of the divergence:
+\todo{Justify why finite difference, and maybe test with other approach to see if improvements}
+% During this whole chapter, we used the finite-differences method for it's simplicity "and because there was no significant differences on the training results obtained when switching the gradient computation method. The  gradients were computed locally within each cell neighborhood on the mesh, to help preserve topological consistency even in geometrically complex zones."
 
-\begin{equation}
-    \nabla \cdot u_i = \frac{\partial u_{i,x}}{\partial x} +\frac{\partial u_{i,y}}{\partial y} + \frac{\partial u_{i,z}}{\partial z} = 0 \quad \text{thus} \quad \nabla \cdot u_i \approx \frac{1}{\mathcal{N}_i} \sum_{j \in \mathcal{N}_i} \frac{(u_j - u_i) \cdot (x_j - x_i)}{||x_j - x_i||_2^2}
-\end{equation}
-Furthermore, we evaluate the convective term $u \cdot \nabla u$ and the viscous term $\mu \Delta u$ using the following approximation of the Laplacian operator:
-
-\begin{equation}
-        \Delta u \approx \frac{1}{\mathcal{N}_i} \sum_{j \in \mathcal{N}_i} \frac{(\nabla u_j - \nabla u_i)(x_j - x_i)^T}{||x_j - x_i||_2^2}
-\end{equation}
-
-Using these approximations, we developed a physical loss function to augment our training by incorporating not only the discrepancies between predicted and ground truth velocities, but also a deeper understanding of the fundamental principles of fluid mechanics. This approach enables us to calculate a continuity loss based on the conservation of mass, as well as convective and viscous losses, which quantify the errors in the convective and viscous terms, respectively (\autoref{eq:NS}): 
+From this gradient approximation, we could further compute approximations for the divergence $\nabla \cdot u_i$ used in the conservation of mass, as well as the convective term $u \cdot \nabla u$ and the viscous term $\mu \Delta u$. Using these approximations, we developed a physical loss function to augment our training by incorporating not only the discrepancies between predicted and ground truth velocities, but also a deeper understanding of the fundamental principles of fluid mechanics. This approach enables us to calculate a continuity loss based on the conservation of mass, as well as convective and viscous losses, which quantify the errors in the convective and viscous terms, respectively (\autoref{eq:NS}): 
 
 
 \begin{align} \label{eq:loss_phy}
@@ -175,6 +102,7 @@ To mitigate the importance of each loss term during training, we combined the da
 
 with $\alpha$, $\beta$ and $\gamma$ being scaling factors. We tuned our weighted loss by evaluating the physical loss terms during the first epochs of training the data-only equivalent models, to adjust the scaling factors in order to get comparable scales for each contributor of the global loss. The data loss term was given a weight of 0.5, while the remaining physics-informed terms were equally distributed over the remaining 0.5. While the continuity term stabilizes after only one epoch, the convection and viscosity losses decrease steadily during the whole training along side with the data loss, providing a faster model convergence. \color{black}
 
+\todo{talk about the residual stuff with CFD: trying to learn 2 things at once}
 
 
 \thirdround
