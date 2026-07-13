@@ -6,9 +6,10 @@ Solving complex systems of partial differential equations, such as the Navier-St
 
 We note an undirected graph $G = (V, E)$ with $V$ a set of vertices with $V = \{v_i\}_{i \in N^v}$ vertices attributes and $E$ a set of edges with $e_{ij}$ linking vertices with indexes $i, j$.
 
+\todo{Make figure from tikz}
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.6\textwidth]{nf/Figure18.pdf}
+    \includegraphics[width=0.6\textwidth]{figs/message_passing.pdf}
     \caption{Graph network updating edges (left) and nodes (right)}
     \label{fig:GN_updates}
 \end{figure}
@@ -37,7 +38,7 @@ Numerical physics simulations like CFD relies on meshes. Pfaff et al. \cite{pfaf
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{nf/Figure19.pdf}
+    \resizebox{0.8\textwidth}{!}{\input{tikz/epd.tex}}
     \caption{Encode-process-decode (EPD) architecture \cite{pfaff_learning_2021} for velocity $U_{t+1}$ prediction from $U_t$.}
     \label{fig:epd}
 \end{figure}
