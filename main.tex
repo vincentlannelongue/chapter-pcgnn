@@ -1,5 +1,5 @@
 
-\documentclass[final,1p,times,twocolumn,numbers]{elsarticle}
+\documentclass[final,1p,times,twocolumn,numbers, 12pt]{elsarticle}
 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -23,6 +23,16 @@
 \newcommand{\thirdround}{\color{black}}
 
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+
+\usepackage[most]{tcolorbox}
+\newtcolorbox{chapterabstract}{
+    colback=blue!5!white,
+    colframe=black!70,
+    boxrule=0.8pt,
+    arc=4pt,
+    left=10pt, right=10pt, top=8pt, bottom=8pt,
+    fontupper=\itshape,
+}
 
 \journal{NPJ}
 
@@ -79,14 +89,14 @@ Graph Neural Networks \sep Intracranial Aneurysms
 \section*{Introduction}
 \import{src}{introduction}
 
+\section*{Methods} \label{sec:Methods}
+\import{src}{methods}
+
 \section*{Results}
 \import{src}{results}
 
 \section*{Discussion}
 \import{src}{discussion}
-
-\section*{Methods} \label{sec:Methods}
-\import{src}{methods}
 
 \section*{Data availability} 
 The datasets used and analyzed during the current study are available at the following link: \url{https://storage.googleapis.com/large-physics-model/datasets/aneurysm/coarse_03_dataset.zip}
