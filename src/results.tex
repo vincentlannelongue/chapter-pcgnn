@@ -205,13 +205,13 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 
 In order to evaluate the generalization capability of the model trained solely on semi-idealized geometries, we conducted two experiments without any additional fine-tuning. Indeed, the proposed GNN framework operates entirely on local mesh and flow features rather than relying on global geometry descriptors, therefore, it is essential to assess its ability to adapt to new settings, provided the underlying physics and boundary conditions remain comparable.
 
-First, we examined the model’s robustness to unseen inflow rates. We ran new CFD simulations on our three test cases using alternative inflow velocity time profiles from ICA and middle cerebral artery (MCA) as well, derived from the literature \cite{Hoi2011, Reymond2009}, shown in \autoref{fig:inflow_profiles}. When evaluated on these six new inflow conditions (with no retraining), the model achieved a 1-step RMSE of 2.4 and a 50-step RMSE of 14.3. Velocity field comparisons in \autoref{fig:slices_inflow} confirm that predictions remain close to the ground truth, despite never encountering these inflow profiles during training. This result demonstrates the model’s adaptability to physiologically realistic variations in inflow dynamics, even though it was trained on a single fixed profile.
+First, we examined the model’s robustness to unseen inflow rates. We ran new CFD simulations on our three test cases using alternative inflow velocity time profiles from ICA and middle cerebral artery (MCA) as well, derived from the literature \cite{reymond_validation_2009, hoi_characterization_2011}, shown in \autoref{fig:inflow_profiles}. When evaluated on these six new inflow conditions (with no retraining), the model achieved a 1-step RMSE of 2.4 and a 50-step RMSE of 14.3. Velocity field comparisons in \autoref{fig:slices_inflow} confirm that predictions remain close to the ground truth, despite never encountering these inflow profiles during training. This result demonstrates the model’s adaptability to physiologically realistic variations in inflow dynamics, even though it was trained on a single fixed profile.
 
 \begin{figure}[!ht]
 \firstround
 \centering
 \includegraphics[width=0.6\textwidth]{figs/inflow_rates.png}
-\caption{Different inflow rates derived from patient-specific ICA and MCA data \cite{Hoi2011, Reymond2009}.}
+\caption{Different inflow rates derived from patient-specific ICA and MCA data \cite{reymond_validation_2009, hoi_characterization_2011}.}
 \label{fig:inflow_profiles}
 \end{figure}
 
