@@ -1,4 +1,4 @@
-\subsection*{Dataset} \label{sec:dataset}
+\subsection{Dataset} \label{sec:dataset}
 The dataset consists of 105 aneurysm 3D meshes, created by intersecting an ideal half torus with aneurysm bulges extracted from patient cases in the \textit{IntrA} dataset \cite{yang_intra_2020}, following Goetz et al. methodology \cite{goetz_anxplore_2024}. We refer to them as semi-idealized geometries, as they combine an idealized toroidal parent artery with a patient-specific aneurysm bulge, as illustrated in \autoref{fig:anxplore}.
 
 These chosen geometries represent sidewall aneurysms located on the internal carotid artery (ICA), particularly near the ICA siphon. This choice is motivated by its clinical representativeness: the ICA siphon region is a common site for aneurysm formation and is frequently modeled in hemodynamic studies due to its characteristic curvature \cite{ramalho_influence_2013}. Several prior works have highlighted the ICA’s susceptibility to aneurysm development at curved segments due to altered flow patterns and wall shear stress concentrations \cite{sunderland_disturbed_2022}. Notably, the siphon’s curvature is often approximated as toroidal, making the torus-shaped backbone both anatomically justified and reproducible across computational settings.
@@ -15,7 +15,7 @@ The bulges range from 3 to 9 mm in diameter, covering diverse pathological shape
 We generated the \textbf{BenchAnXplore} dataset following the meshing, coarsening and simulation processes further detailed in the \nameref{sec:Methods} section, and obtained 105 aneurysm geometries, with 80 simulated timeframes for each of these cases. This dataset is now made available as a benchmark case for AI intracranial aneurysms applications.
 
 
-\subsection*{Training} \label{sec:training}
+\subsection{Training} \label{sec:training}
 We trained and compared four models to evaluate the impact of node feature enhancement and physically-informed improvements separately. To ensure a fair comparison, all models were trained using the same configuration. All MLPs (multilayer perceptrons) used for encoders, decoders and update functions within the GN blocks, have two hidden layers of 128 neurons each, and use a ReLU activation function. We used 15 rounds of message passing, bringing the total number of parameters to approximately 3 million.
 
 With 105 simulations, each spanning 80 timesteps, we trained on 95 simulations and randomly selected 10 for testing and evaluation (highlighted in red in \autoref{fig:anxplore}). This test set gathers a wide variety in shapes and flow characteristics as depicted in \autoref{fig:test_set}. Given that our meshes contain in average 20,000 nodes, this results in over 75 million training tokens. Recall that number of training tokens is equal to trajectories * timesteps * data points.
@@ -47,7 +47,7 @@ We trained for 20 epochs e.g. 144k training steps, using a fixed learning rate o
     \label{fig:eval_cases}
 \end{figure}
 
-\subsection*{Numerical performance}
+\subsection{Numerical performance}
 
 We evaluated all four models on the full test set for both next-step and rollout prediction with 1-step and 50-step Root Mean Square Errors (RMSE) as described in the \nameref{sec:Methods} section; mean errors over all test cases are given in \autoref{tab:model-configurations}. While all models perform well on next-step prediction, as shown by the 1-step error in \autoref{tab:model-configurations}, significant differences emerge in rollout prediction in particular at time $t_2$ as clearly highlighted in  \autoref{fig:model_comparison}. 
 
@@ -196,7 +196,7 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 \label{fig:massflow}
 \end{figure}
 
-\subsection*{Generalization to unseen cases}
+\subsection{Generalization to unseen cases}
 
 In order to evaluate the generalization capability of the model trained solely on semi-idealized geometries, we conducted two experiments without any additional fine-tuning. Indeed, the proposed GNN framework operates entirely on local mesh and flow features rather than relying on global geometry descriptors, therefore, it is essential to assess its ability to adapt to new settings, provided the underlying physics and boundary conditions remain comparable.
 
