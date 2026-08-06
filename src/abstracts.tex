@@ -1,0 +1,17 @@
+\begin{chapterabstract}
+\textbf{\textit{Résumé}}
+\vspace{2pt}
+
+Comme vu dans le chapitre d'Introduction, les anévrismes intracrâniens sont des affections vasculaires potentiellement mortelles nécessitant une évaluation précise du risque afin de guider le traitement. Les biomarqueurs hémodynamiques tels que le WSS et l'OSI sont des prédicteurs prometteurs du risque de rupture, mais restent sous-utilisés en clinique en raison du coût de calcul élevé des méthodes CFD traditionnelles. Nous proposons dans ce chapitre un réseau de neurones sur graphes (GNN) avec contraintes physiques, entrainé sur des données issues de CFD haute fidélité pour prédire des champs hémodynamiques 3D complets et résolus dans le temps tout au long du cycle cardiaque. Notre modèle intègre des caratctéristiques sur les noeuds enrichies ainsi que des contraintes basées sur la physique afin de capturer un comportement d'écoulement spatio-temporel complexe en quasi temps réel. Nous avons testé ses capacités de généralisation à des conditions d'entrée variables et à des géométries spécifiques à des patients non vues, sans nécessiter de \textit{fine-tuning}. Un jeu de données comprenant 105 géométries semi-idéalisées d'anévrismes dérivées de patients, accompagnées de champs CFD, est utilisé dans ce travail.
+
+Ce chapitre montre la possibilité d'adapter une architecture standarde de GNN pour la prédiction de champs hémodynamiques sur des géométries volumiques variées, et pose les bases pour le dévelopements d'outils pour la stratification de risque dans les anévrismes cérébraux. 
+\end{chapterabstract}
+
+\vspace{2pt}
+
+\textit{This chapter stems from an article written in the beginning of 2025 and published in 2026 in NPJ Digital Medicine \cite{lannelongue_physics_2026}. Though it has been adapted and modified for clarity and readbility, by avoiding repetitions from previous chapters, the majority of its content has not been altered from the original publication.}
+
+\hrule
+
+\subsection*{Abstract}
+Intracranial aneurysms (IAs) are life-threatening vascular conditions requiring accurate risk assessment to guide treatment. Hemodynamic biomarkers such as wall shear stress and oscillatory shear index are promising predictors of rupture risk but remain underused clinically due to the high computational cost of traditional CFD methods. We propose a physics-constrained graph neural network (GNN) framework trained on high-fidelity CFD data to predict full 3D, time-resolved hemodynamic fields throughout the cardiac cycle. Our model incorporates enhanced node features and physics-based constraints to capture complex spatio-temporal flow behavior in near real time. It generalizes to varying inflow conditions and unseen patient-specific geometries with no fine-tuning. Additionally, we release a benchmark dataset of 105 patient-derived aneurysm geometries with CFD fields to support the machine learning (ML) community. This is the first GNN model applied to transient 3D aneurysmal flow prediction, paving the way for rapid, AI-driven hemodynamic analysis toward risk stratification and treatment planning.

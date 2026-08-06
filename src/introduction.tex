@@ -1,15 +1,3 @@
-
-\textit{This chapter stems from an article written in the beginning of 2025 and published in 2026 in NPJ Digital Medicine \cite{lannelongue_physics_2026}. Though it has been adapted and modified for clarity and readbility, by avoiding repetitions from previous chapters, the majority of its content has not been altered from the original publication.}
-
-\begin{chapterabstract}
-\textbf{\textit{Abstract}}
-\vspace{2pt}
-
-todo
-\end{chapterabstract}
-
-
-\section{Introduction}
 Hemodynamics are a much needed addition to clinical routine for IA diagnosis and treatment decision, as thoroughly discussed in the Introduction chapter of this thesis \todo{ref to hemodynamics in intro}. However CFD traditionnal methods remain out of reach for doctors as their deployment in a hospital setting seems highly unlikely. In parallel, artificial intelligence (AI) and machine learning (ML) methods have demonstrated transformative potential across a range of neurovascular interventions, as evidenced by their application in device tracking during endovascular procedures. For instance, real-time AI-assisted platforms like Neuro-Vascular Assist (iMed technologies, Tokyo, Japan) have improved precision and reduced cognitive load during interventions such as aneurysm coiling and liquid embolization \cite{sakakura_real_2024, sakakura_pioneering_2024}, demonstrating the clinical feasibility of AI-driven decision support. Inspired by these successes, researchers have begun exploring ML-based surrogates for CFD, aiming to achieve accurate, near-instantaneous predictions of hemodynamics \cite{arzani_machine_2022}. Traditional ML approaches have largely relied on convolutional neural networks (CNNs) due to their effectiveness in image-based tasks. While CNNs have shown promise in predicting certain hemodynamic parameters from 2D or simplified 3D data \cite{gharleghi_transient_2022, ferdian_wssnet_2022, rutkowski_enhancement_2021}, their reliance on structured grids makes them ill-suited for the complex, unstructured nature of aneurysm geometries. This limitation is particularly patent when attempting to model the intricate, three-dimensional flow patterns critical to understanding aneurysm pathophysiology. 
 
 Graph neural networks (GNNs), introduced in this work in \todo{ref to GNN in methods}, provide a compelling alternative by leveraging the graph-like structure of CFD domains, enabling the direct processing of irregular, non-Euclidean data. Going beyond point cloud-based methods like PointNet and PointNet++\cite{charles_pointnet_2017, qi_pointnet_2017} which have been tested on simplified geometries and stationary hemodynamics predictions\cite{li_prediction_2021, suk_physics-informed_2024}, GNNs rely on message passing mechanisms to iteratively update unstructured graphs, and efficiently learn local patterns.  
