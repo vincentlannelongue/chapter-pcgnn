@@ -1,7 +1,55 @@
 
-\todo{Small GNN section: ref to methods chapter, precisions on model size and architecture}
+\subsection*{Graph Neural Networks} \label{sec:gn_layer}
 
-% All the underlying processing and updating functions here are ReLU-activated 2 hidden-layer MPLs. 
+GNNs are a class of neural networks working on sets of vertices and edges. Through different deep learning techniques such as convolution (Graph Convolutional Networks) \cite{kipf_semi-supervised_2017}, attention (Graph Attention Networks) \cite{velickovic_graph_2018} or recurrent layers (Graph Recurrent Networks) \cite{ruiz_gated_2020}, they exploit message passing mechanisms to learn the relations between neighboring nodes, and have shown great performances in many area of physics \cite{janny_eagle_2023, gladstone_gnn-based_2023, lam_graphcast_2023, garnier_meshmask_2024, lin_up-sampling-only_2024}.
+
+Solving complex systems of partial differential equations, such as the Navier-Stokes equations, often requires mesh-based discretisation of the computational domain. These meshes are typically adapted to enhance numerical accuracy in critical regions while minimizing computational cost in less challenging areas \cite{coupez_solution_2013}. However, traditional deep-learning architectures, such as convolutional, recurrent, or fully connected layers, struggle to effectively handle the anisotropic and irregular nature of meshes. They either fail to capture local dependencies properly or do so at a prohibitive computational expense. Building on the founding that the deep-learning toolbox layers did not offer the possibility of learning arbitrary relations between elements of a set with relational structure such as a graph, Battaglia et al. \cite{battaglia_relational_2018} introduced the Graph Network (GN) layer, aiming to create a general framework for graph computation. Inspired from Message Passing Neural Networks \cite{gilmer_neural_2017} among others, this layer is designed to take a graph as input, process the graph with any subsequent model such as a neural network but not necessarily, and return a graph, using the nodes as entities with features, edges as relations between entities, and global attributes over the whole graph. 
+
+We note an undirected graph $G = (V, E)$ with $V$ a set of vertices with $V = \{v_i\}_{i \in N^v}$ vertices attributes and $E$ a set of edges with $e_{ij}$ linking vertices with indexes $i, j$.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figs/message_passing.pdf}
+    \caption{Graph network updating edges (left) and nodes (right)}
+    \label{fig:GN_updates}
+\end{figure}
+
+The GN updates edges attributes with an edge-update function $\varphi_E$, gathers a vertex neighborhood information by aggregating the updated edges connected to it with an aggregation function $\rho$, and updates the vertex with a vertex-update function $\varphi_V$ (\autoref{fig:GN_updates}). Because the update functions are shared over every nodes and edges, graph networks are adapted to learn local physical behavior over every relation in the graph. We purposefully left out global graph attributes here to avoid unnecessary complications of the framework, as we will not be using them.
+
+\begin{align} \label{eq:GN}
+    \tilde{e}_{ij} &= \varphi_E(e_{ij}, v_i, v_j) \nonumber\\
+    \tilde{e}_i &= \rho(\{ \tilde{e}_{ij} \}_j) \\
+    \tilde{v}_i &= \varphi_V(v_i, \tilde{e}_i) \nonumber
+\end{align}
+
+with $\tilde{e_{ij}}$ being the updated edge attributes from the initial edge attributes and the connected vertices attributes, $\tilde{e}_i$ being the aggregated information of all edges linked to vertex $i$, and $\tilde{v}_i$ being the updated vertex attributes from the initial vertex attributes and the aggregated neighborhood information.
+
+
+\subsection{MeshGraphNet}
+\label{sec:MGN}
+
+Numerical physics simulations like CFD relies on meshes. Pfaff et al. \cite{pfaff_learning_2021} took advantage of this data structure and built a GNN model using physical meshes as inputs, designed for next-step prediction in physical problems such as flow field prediction around a cylinder or a wing profile. With the mesh information at $t$ (and potentially $t-1$), the trained network can predict the physical fields at $t+1$. By inferring on its own predictions, the network can generate a whole simulation with only a few initial timesteps to infer from; the MeshGraphNet (MGN) model has achieved state of the art results, being able to predict the temporal evolution of these systems during significant time periods while remaining coherent with the physical simulations. The MGN model learns the system's forward dynamics with an encode-process-decode (EPD) architecture (\autoref{fig:epd}), using multilayer perceptrons (MLPs).
+
+\paragraph{Encoder} The encoder extracts all input features for nodes and edges from the graph $G_t$, which is derived from the mesh at time $t$. These features include physical properties such as velocity, pressure or stress, as well as geometrical attributes like edge lengths and node positions. The node and edge features are respectively encoded into latent spaces by the encoder MLP's $\epsilon_V$ and $\epsilon_E$ into latent spaces of size $d_v$ and $d_e$ the embedding dimensions, as graph nodes $v_i$ and edges $e_{ij}$, to constitute the latent space graph $Q_t$.
+
+
+\paragraph{Processor} The processor then performs rounds of message passing by applying $L$ several successive GN layers. For each round of message passing, each node of the graph sends messages to its neighbors, which consist of the encoded and processed node’s and edge’s feature information. As in the GN layer described in \autoref{sec:gn_layer}, the neighbors aggregate and process these messages to gain a collective understanding of their local neighborhood, to update their own feature representation. This allows them to incorporate the new information received from their neighbors and refine their own states. Each of these GN layers has update functions $\varphi_E$ and $\varphi_V$ respectively for edges and nodes, as described in \autoref{eq:GN}. These functions are MLPs as well, with different sets of parameters for each GN layer, and the edge aggregation function $\rho$ is an element-wise summation. Performing several consecutive rounds of message passing allows the GNN to infer the evolution of the graph with information circulating over the whole domain, and to return an updated latent space graph $Q_{t+1}$ with updated node and edge latent vectors $\tilde{v}_i$ and $\tilde{e}_{ij}$. 
+
+\paragraph{Decoder} Finally, the decoder translates the processed node vectors contained in the latent space updated graph $Q_{t+1}$ with a final MLP $\delta_V$ to a physical update, which is added to the input mesh in order to get the next-step physical mesh $G_{t+1}$ with updated physical fields. 
+
+\begin{figure}[!ht]
+    \centering
+    \resizebox{0.8\textwidth}{!}{\input{tikz/epd.tex}}
+    \caption{Encode-process-decode (EPD) architecture \cite{pfaff_learning_2021} for velocity $U_{t+1}$ prediction from $U_t$.}
+    \label{fig:epd}
+\end{figure}
+
+All the underlying processing and updating functions here are ReLU-activated 2 hidden-layer MPLs. The model learns the physical behavior by minimizing the differences between its predictions and the ground truth data computed with numerical solver, with a data loss being the mean square error, for a given physical quantity $a$:
+
+\begin{equation} \label{eq:loss_data}
+    \mathcal{L}_{data} = \underset{v \in V}{\mathrm{mean}} \ \vert \vert a_v - \tilde{a_v} \vert \vert^2_2
+\end{equation}
+with $a_v$ being the ground truth and $\tilde{a_v}$ the prediction at node $v$.
 
 \subsection{Hemodynamics simulations} \label{sec:blood_flow}
 
