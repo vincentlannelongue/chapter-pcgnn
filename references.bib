@@ -1,4 +1,143 @@
 
+@inproceedings{gilmer_neural_2017,
+	title = {Neural {Message} {Passing} for {Quantum} {Chemistry}},
+	issn = {2640-3498},
+	url = {https://proceedings.mlr.press/v70/gilmer17a.html},
+	abstract = {Supervised learning on molecules has incredible potential to be useful in chemistry, drug discovery, and materials science. Luckily, several promising and closely related neural network models invariant to molecular symmetries have already been described in the literature. These models learn a message passing algorithm and aggregation procedure to compute a function of their entire input graph. At this point, the next step is to find a particularly effective variant of this general approach and apply it to chemical prediction benchmarks until we either solve them or reach the limits of the approach. In this paper, we reformulate existing models into a single common framework we call Message Passing Neural Networks (MPNNs) and explore additional novel variations within this framework. Using MPNNs we demonstrate state of the art results on an important molecular property prediction benchmark; these results are strong enough that we believe future work should focus on datasets with larger molecules or more accurate ground truth labels.},
+	language = {en},
+	urldate = {2024-10-22},
+	booktitle = {Proceedings of the 34th {International} {Conference} on {Machine} {Learning}},
+	publisher = {PMLR},
+	author = {Gilmer, Justin and Schoenholz, Samuel S. and Riley, Patrick F. and Vinyals, Oriol and Dahl, George E.},
+	month = jul,
+	year = {2017},
+	pages = {1263--1272},
+	file = {Full Text PDF:C\:\\Users\\vince\\Zotero\\storage\\SQLLGMYR\\Gilmer et al. - 2017 - Neural Message Passing for Quantum Chemistry.pdf:application/pdf;Supplementary PDF:C\:\\Users\\vince\\Zotero\\storage\\Q25LZ7DC\\Gilmer et al. - 2017 - Neural Message Passing for Quantum Chemistry.pdf:application/pdf},
+}
+
+@misc{battaglia_relational_2018,
+	title = {Relational inductive biases, deep learning, and graph networks},
+	url = {http://arxiv.org/abs/1806.01261},
+	doi = {10.48550/arXiv.1806.01261},
+	abstract = {Artificial intelligence (AI) has undergone a renaissance recently, making major progress in key domains such as vision, language, control, and decision-making. This has been due, in part, to cheap data and cheap compute resources, which have fit the natural strengths of deep learning. However, many defining characteristics of human intelligence, which developed under much different pressures, remain out of reach for current approaches. In particular, generalizing beyond one's experiences--a hallmark of human intelligence from infancy--remains a formidable challenge for modern AI. The following is part position paper, part review, and part unification. We argue that combinatorial generalization must be a top priority for AI to achieve human-like abilities, and that structured representations and computations are key to realizing this objective. Just as biology uses nature and nurture cooperatively, we reject the false choice between "hand-engineering" and "end-to-end" learning, and instead advocate for an approach which benefits from their complementary strengths. We explore how using relational inductive biases within deep learning architectures can facilitate learning about entities, relations, and rules for composing them. We present a new building block for the AI toolkit with a strong relational inductive bias--the graph network--which generalizes and extends various approaches for neural networks that operate on graphs, and provides a straightforward interface for manipulating structured knowledge and producing structured behaviors. We discuss how graph networks can support relational reasoning and combinatorial generalization, laying the foundation for more sophisticated, interpretable, and flexible patterns of reasoning. As a companion to this paper, we have released an open-source software library for building graph networks, with demonstrations of how to use them in practice.},
+	urldate = {2024-10-22},
+	publisher = {arXiv},
+	author = {Battaglia, Peter W. and Hamrick, Jessica B. and Bapst, Victor and Sanchez-Gonzalez, Alvaro and Zambaldi, Vinicius and Malinowski, Mateusz and Tacchetti, Andrea and Raposo, David and Santoro, Adam and Faulkner, Ryan and Gulcehre, Caglar and Song, Francis and Ballard, Andrew and Gilmer, Justin and Dahl, George and Vaswani, Ashish and Allen, Kelsey and Nash, Charles and Langston, Victoria and Dyer, Chris and Heess, Nicolas and Wierstra, Daan and Kohli, Pushmeet and Botvinick, Matt and Vinyals, Oriol and Li, Yujia and Pascanu, Razvan},
+	month = oct,
+	year = {2018},
+	note = {arXiv:1806.01261},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning, Statistics - Machine Learning},
+	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\Y6EYA9H7\\Battaglia et al. - 2018 - Relational inductive biases, deep learning, and gr.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\2ITBEU6S\\1806.html:text/html},
+}
+
+@misc{velickovic_graph_2018,
+	title = {Graph {Attention} {Networks}},
+	url = {http://arxiv.org/abs/1710.10903},
+	doi = {10.48550/arXiv.1710.10903},
+	abstract = {We present graph attention networks (GATs), novel neural network architectures that operate on graph-structured data, leveraging masked self-attentional layers to address the shortcomings of prior methods based on graph convolutions or their approximations. By stacking layers in which nodes are able to attend over their neighborhoods' features, we enable (implicitly) specifying different weights to different nodes in a neighborhood, without requiring any kind of costly matrix operation (such as inversion) or depending on knowing the graph structure upfront. In this way, we address several key challenges of spectral-based graph neural networks simultaneously, and make our model readily applicable to inductive as well as transductive problems. Our GAT models have achieved or matched state-of-the-art results across four established transductive and inductive graph benchmarks: the Cora, Citeseer and Pubmed citation network datasets, as well as a protein-protein interaction dataset (wherein test graphs remain unseen during training).},
+	urldate = {2024-10-22},
+	publisher = {arXiv},
+	author = {Veličković, Petar and Cucurull, Guillem and Casanova, Arantxa and Romero, Adriana and Liò, Pietro and Bengio, Yoshua},
+	month = feb,
+	year = {2018},
+	note = {arXiv:1710.10903},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning, Computer Science - Social and Information Networks, Statistics - Machine Learning},
+	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\MCIVNYJE\\Veličković et al. - 2018 - Graph Attention Networks.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\YM5SBGDW\\1710.html:text/html},
+}
+
+@misc{kipf_semi-supervised_2017,
+	title = {Semi-{Supervised} {Classification} with {Graph} {Convolutional} {Networks}},
+	url = {http://arxiv.org/abs/1609.02907},
+	doi = {10.48550/arXiv.1609.02907},
+	abstract = {We present a scalable approach for semi-supervised learning on graph-structured data that is based on an efficient variant of convolutional neural networks which operate directly on graphs. We motivate the choice of our convolutional architecture via a localized first-order approximation of spectral graph convolutions. Our model scales linearly in the number of graph edges and learns hidden layer representations that encode both local graph structure and features of nodes. In a number of experiments on citation networks and on a knowledge graph dataset we demonstrate that our approach outperforms related methods by a significant margin.},
+	urldate = {2024-10-22},
+	publisher = {arXiv},
+	author = {Kipf, Thomas N. and Welling, Max},
+	month = feb,
+	year = {2017},
+	note = {arXiv:1609.02907},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\358BLLBR\\Kipf and Welling - 2017 - Semi-Supervised Classification with Graph Convolut.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\MEXGSB4I\\1609.html:text/html},
+}
+
+@misc{lin_up-sampling-only_2024,
+	title = {Up-sampling-only and {Adaptive} {Mesh}-based {GNN} for {Simulating} {Physical} {Systems}},
+	url = {http://arxiv.org/abs/2409.04740},
+	doi = {10.48550/arXiv.2409.04740},
+	abstract = {Traditional simulation of complex mechanical systems relies on numerical solvers of Partial Differential Equations (PDEs), e.g., using the Finite Element Method (FEM). The FEM solvers frequently suffer from intensive computation cost and high running time. Recent graph neural network (GNN)-based simulation models can improve running time meanwhile with acceptable accuracy. Unfortunately, they are hard to tailor GNNs for complex mechanical systems, including such disadvantages as ineffective representation and inefficient message propagation (MP). To tackle these issues, in this paper, with the proposed Up-sampling-only and Adaptive MP techniques, we develop a novel hierarchical Mesh Graph Network, namely UA-MGN, for efficient and effective mechanical simulation. Evaluation on two synthetic and one real datasets demonstrates the superiority of the UA-MGN. For example, on the Beam dataset, compared to the state-of-the-art MS-MGN, UA-MGN leads to 40.99\% lower errors but using only 43.48\% fewer network parameters and 4.49\% fewer floating point operations (FLOPs).},
+	urldate = {2024-12-11},
+	publisher = {arXiv},
+	author = {Lin, Fu and Shi, Jiasheng and Luo, Shijie and Zhao, Qinpei and Rao, Weixiong and Chen, Lei},
+	month = sep,
+	year = {2024},
+	note = {arXiv:2409.04740 [cs]},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computational Engineering, Finance, and Science, Computer Science - Machine Learning},
+	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\NFPT4QW6\\Lin et al. - 2024 - Up-sampling-only and Adaptive Mesh-based GNN for S.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\EGAZB4DQ\\2409.html:text/html},
+}
+
+@misc{janny_eagle_2023,
+	title = {Eagle: {Large}-{Scale} {Learning} of {Turbulent} {Fluid} {Dynamics} with {Mesh} {Transformers}},
+	shorttitle = {Eagle},
+	url = {http://arxiv.org/abs/2302.10803},
+	doi = {10.48550/arXiv.2302.10803},
+	abstract = {Estimating fluid dynamics is classically done through the simulation and integration of numerical models solving the Navier-Stokes equations, which is computationally complex and time-consuming even on high-end hardware. This is a notoriously hard problem to solve, which has recently been addressed with machine learning, in particular graph neural networks (GNN) and variants trained and evaluated on datasets of static objects in static scenes with fixed geometry. We attempt to go beyond existing work in complexity and introduce a new model, method and benchmark. We propose EAGLE, a large-scale dataset of 1.1 million 2D meshes resulting from simulations of unsteady fluid dynamics caused by a moving flow source interacting with nonlinear scene structure, comprised of 600 different scenes of three different types. To perform future forecasting of pressure and velocity on the challenging EAGLE dataset, we introduce a new mesh transformer. It leverages node clustering, graph pooling and global attention to learn long-range dependencies between spatially distant data points without needing a large number of iterations, as existing GNN methods do. We show that our transformer outperforms state-of-the-art performance on, both, existing synthetic and real datasets and on EAGLE. Finally, we highlight that our approach learns to attend to airflow, integrating complex information in a single iteration.},
+	urldate = {2024-12-11},
+	publisher = {arXiv},
+	author = {Janny, Steeven and Béneteau, Aurélien and Nadri, Madiha and Digne, Julie and Thome, Nicolas and Wolf, Christian},
+	month = mar,
+	year = {2023},
+	note = {arXiv:2302.10803 [cs]},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning, Physics - Fluid Dynamics},
+	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\IJY5NQGA\\Janny et al. - 2023 - Eagle Large-Scale Learning of Turbulent Fluid Dyn.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\SJR7AS7Q\\2302.html:text/html},
+}
+
+@article{ruiz_gated_2020,
+	title = {Gated {Graph} {Recurrent} {Neural} {Networks}},
+	volume = {68},
+	issn = {1053-587X, 1941-0476},
+	url = {http://arxiv.org/abs/2002.01038},
+	doi = {10.1109/TSP.2020.3033962},
+	abstract = {Graph processes exhibit a temporal structure determined by the sequence index and and a spatial structure determined by the graph support. To learn from graph processes, an information processing architecture must then be able to exploit both underlying structures. We introduce Graph Recurrent Neural Networks (GRNNs) as a general learning framework that achieves this goal by leveraging the notion of a recurrent hidden state together with graph signal processing (GSP). In the GRNN, the number of learnable parameters is independent of the length of the sequence and of the size of the graph, guaranteeing scalability. We prove that GRNNs are permutation equivariant and that they are stable to perturbations of the underlying graph support. To address the problem of vanishing gradients, we also put forward gated GRNNs with three different gating mechanisms: time, node and edge gates. In numerical experiments involving both synthetic and real datasets, time-gated GRNNs are shown to improve upon GRNNs in problems with long term dependencies, while node and edge gates help encode long range dependencies present in the graph. The numerical results also show that GRNNs outperform GNNs and RNNs, highlighting the importance of taking both the temporal and graph structures of a graph process into account.},
+	urldate = {2024-12-11},
+	journal = {IEEE Transactions on Signal Processing},
+	author = {Ruiz, Luana and Gama, Fernando and Ribeiro, Alejandro},
+	year = {2020},
+	note = {arXiv:2002.01038 [eess]},
+	keywords = {Computer Science - Machine Learning, Electrical Engineering and Systems Science - Signal Processing},
+	pages = {6303--6318},
+	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\37L8MYHN\\Ruiz et al. - 2020 - Gated Graph Recurrent Neural Networks.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\BLCF3PQC\\2002.html:text/html},
+}
+
+@article{coupez_solution_2013,
+	title = {Solution of high-{Reynolds} incompressible flow with stabilized finite element and adaptive anisotropic meshing},
+	volume = {267},
+	issn = {0045-7825},
+	url = {https://www.sciencedirect.com/science/article/pii/S0045782513002077},
+	doi = {10.1016/j.cma.2013.08.004},
+	abstract = {The objective of this paper is to show that anisotropic meshes with highly stretched elements can be used to compute high Reynolds number flows. In particular, it will be shown that boundary layers, flow detachments and all vortices are well captured automatically by the mesh. We present an anisotropic meshing based on a posteriori estimation for the incompressible Navier Stokes equations. The proposed a posteriori estimate is based on the length distribution tensor approach and the associated edge based error analysis. The Finite Element flow solver is based on a Variational MultiScale (VMS) method, which consists in here of decomposing both the velocity and the pressure fields into coarse/resolved and fine/unresolved scales. This choice of decomposition is shown to be efficient for simulating flows at high Reynolds number. The stabilization parameters are determined taking into account the anisotropy of the mesh using a directional element diameter. The adaptation algorithm is applied to high Reynolds number flows inside the 2D and 3D lid-driven cavities and compared to accurate reference solutions.},
+	urldate = {2025-02-20},
+	journal = {Computer Methods in Applied Mechanics and Engineering},
+	author = {Coupez, T. and Hachem, E.},
+	month = dec,
+	year = {2013},
+	keywords = {2D \& 3D lid-driven cavity, Anisotropic meshing, Boundary layers, High Reynolds number, Navier–Stokes},
+	pages = {65--85},
+	file = {ScienceDirect Snapshot:C\:\\Users\\vince\\Zotero\\storage\\W6AW4VTD\\S0045782513002077.html:text/html},
+}
+
+@inproceedings{garnier_meshmask_2024,
+	title = {{MeshMask}: {Physics}-{Based} {Simulations} with {Masked} {Graph} {Neural} {Networks}},
+	shorttitle = {{MeshMask}},
+	url = {https://openreview.net/forum?id=bFHR8hNk4I},
+	abstract = {We introduce a novel masked pre-training technique for graph neural networks (GNNs) applied to computational fluid dynamics (CFD) problems. By randomly masking up to 40{\textbackslash}\% of input mesh nodes during pre-training, we force the model to learn robust representations of complex fluid dynamics. We pair this masking strategy with an asymmetric encoder-decoder architecture and gated multi-layer perceptrons to further enhance performance. The proposed method achieves state-of-the-art results on seven CFD datasets, including a new challenging dataset of 3D intracranial aneurysm simulations with over 250,000 nodes per mesh. Moreover, it significantly improves model performance and training efficiency across such diverse range of fluid simulation tasks. We demonstrate improvements of up to 60{\textbackslash}\% in long-term prediction accuracy compared to previous best models, while maintaining similar computational costs. Notably, our approach enables effective pre-training on multiple datasets simultaneously, significantly reducing the time and data required to achieve high performance on new tasks. Through extensive ablation studies, we provide insights into the optimal masking ratio, architectural choices, and training strategies.},
+	language = {en},
+	urldate = {2026-07-13},
+	author = {Garnier, Paul and Lannelongue, Vincent and Viquerat, Jonathan and Hachem, Elie},
+	month = oct,
+	year = {2024},
+	file = {Full Text PDF:C\:\\Users\\vince\\Zotero\\storage\\F9F7PRU5\\Garnier et al. - 2024 - MeshMask Physics-Based Simulations with Masked Graph Neural Networks.pdf:application/pdf},
+}
+
 @article{lannelongue_physics_2026,
 	title = {Physics constrained graph neural network for real time prediction of intracranial aneurysm hemodynamics},
 	volume = {9},
@@ -15,7 +154,7 @@
 	author = {Lannelongue, Vincent and Garnier, Paul and Jeken-Rico, Pablo and Goetz, Aurèle and Meliga, Philippe and Chau, Yves and Hachem, Elie},
 	month = feb,
 	year = {2026},
-	keywords = {Biomedical engineering, Computational models, Fluid dynamics, Machine learning, Predictive medicine},
+	keywords = {Machine learning, Biomedical engineering, Fluid dynamics, Computational models, Predictive medicine},
 	pages = {212},
 	file = {Full Text PDF:C\:\\Users\\vince\\Zotero\\storage\\LW4B3Y3Z\\Lannelongue et al. - 2026 - Physics constrained graph neural network for real time prediction of intracranial aneurysm hemodynam.pdf:application/pdf},
 }
@@ -64,7 +203,7 @@
 	author = {Pfaff, Tobias and Fortunato, Meire and Sanchez-Gonzalez, Alvaro and Battaglia, Peter W.},
 	month = jun,
 	year = {2021},
-	keywords = {and Science, Computer Science - Computational Engineering, Computer Science - Machine Learning, Finance},
+	keywords = {Computer Science - Machine Learning, and Science, Computer Science - Computational Engineering, Finance},
 	file = {arXiv Fulltext PDF:C\:\\Users\\vince\\Zotero\\storage\\9VMT94KA\\Pfaff et al. - 2021 - Learning Mesh-Based Simulation with Graph Networks.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\vince\\Zotero\\storage\\26NG7TZL\\2010.html:text/html},
 }
 
@@ -81,7 +220,7 @@
 	author = {Hernández, Quercus and Badías, Alberto and Chinesta, Francisco and Cueto, Elías},
 	month = mar,
 	year = {2024},
-	keywords = {and Science, Computer Science - Computational Engineering, Computer Science - Machine Learning, Finance, Mathematics - Dynamical Systems},
+	keywords = {Computer Science - Machine Learning, Mathematics - Dynamical Systems, and Science, Computer Science - Computational Engineering, Finance},
 	pages = {967--976},
 	file = {arXiv.org Snapshot:C\:\\Users\\vince\\Zotero\\storage\\XJQZAHXQ\\2203.html:text/html;PDF:C\:\\Users\\vince\\Zotero\\storage\\9ASWYLSB\\Hernández et al. - 2024 - Thermodynamics-informed graph neural networks.pdf:application/pdf},
 }
@@ -97,7 +236,7 @@
 	author = {Yang, Xi and Xia, Ding and Kin, Taichi and Igarashi, Takeo},
 	month = apr,
 	year = {2020},
-	keywords = {Computer Science - Computer Vision and Pattern Recognition, Computer Science - Machine Learning, Electrical Engineering and Systems Science - Image and Video Processing, Statistics - Machine Learning},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Computer Vision and Pattern Recognition, Electrical Engineering and Systems Science - Image and Video Processing},
 }
 
 @article{goetz_anxplore_2024,
@@ -114,7 +253,7 @@
 	author = {Goetz, Aurèle and Jeken-Rico, Pablo and Pelissier, Ugo and Chau, Yves and Sédat, Jacques and Hachem, Elie},
 	month = jun,
 	year = {2024},
-	keywords = {arterial wall tissue modelling, Fluid-Structure Interaction, Haemodynamics, Intracranial Aneurysm, open-source dataset},
+	keywords = {Intracranial Aneurysm, arterial wall tissue modelling, Fluid-Structure Interaction, Haemodynamics, open-source dataset},
 }
 
 @article{raissi_physics-informed_2019,
@@ -130,7 +269,7 @@
 	author = {Raissi, M. and Perdikaris, P. and Karniadakis, G. E.},
 	month = feb,
 	year = {2019},
-	keywords = {Data-driven scientific computing, Machine learning, Nonlinear dynamics, Predictive modeling, Runge–Kutta methods},
+	keywords = {Machine learning, Data-driven scientific computing, Nonlinear dynamics, Predictive modeling, Runge–Kutta methods},
 	pages = {686--707},
 }
 
@@ -149,7 +288,7 @@
 	author = {Pelissier, Ugo and Parret-Fréaud, Augustin and Bordeu, Felipe and Mesri, Youssef},
 	month = jan,
 	year = {2024},
-	keywords = {artificial intelligence, computational fluid dynamics, mesh adaptation, message passing graph neural networks},
+	keywords = {computational fluid dynamics, artificial intelligence, mesh adaptation, message passing graph neural networks},
 	pages = {2933},
 }
 
@@ -179,7 +318,7 @@
 	author = {Li, Gaoyang and Song, Xiaorui and Wang, Haoran and Liu, Siwei and Ji, Jiayuan and Guo, Yuting and Qiao, Aike and Liu, Youjun and Wang, Xuezheng},
 	month = sep,
 	year = {2021},
-	keywords = {Cerebral aneurysm, deep learning, flow-diverting stent, Hemodynamics, Porous-medium},
+	keywords = {Hemodynamics, deep learning, Cerebral aneurysm, flow-diverting stent, Porous-medium},
 }
 
 @misc{qi_pointnet_2017,
@@ -207,7 +346,7 @@
 	author = {Charles, R. Qi and Su, Hao and Kaichun, Mo and Guibas, Leonidas J.},
 	month = jul,
 	year = {2017},
-	keywords = {Computer architecture, Feature extraction, Machine learning, Semantics, Shape, Three-dimensional displays},
+	keywords = {Machine learning, Computer architecture, Feature extraction, Semantics, Shape, Three-dimensional displays},
 	pages = {77--85},
 }
 
@@ -223,7 +362,7 @@
 	author = {Gharleghi, Ramtin and Sowmya, Arcot and Beier, Susann},
 	month = oct,
 	year = {2022},
-	keywords = {Computational fluid dynamics, Coronary artery, Machine learning},
+	keywords = {Machine learning, Computational fluid dynamics, Coronary artery},
 	pages = {107013},
 }
 
@@ -241,7 +380,7 @@
 	author = {Ferdian, Edward and Dubowitz, David J. and Mauger, Charlene A. and Wang, Alan and Young, Alistair A.},
 	month = jan,
 	year = {2022},
-	keywords = {4D flow cardiac MRI, Aorta, Computational fluid dynamics, deep learning, Wall Shear Stress (WSS)},
+	keywords = {Computational fluid dynamics, 4D flow cardiac MRI, deep learning, Aorta, Wall Shear Stress (WSS)},
 }
 
 @article{arzani_machine_2022,
@@ -259,7 +398,7 @@
 	author = {Arzani, Amirhossein and Wang, Jian-Xun and Sacks, Michael S. and Shadden, Shawn C.},
 	month = jun,
 	year = {2022},
-	keywords = {Data-driven modeling, Deep learning, Hemodynamics, Physics-based modeling, Scientific machine learning},
+	keywords = {Hemodynamics, Deep learning, Data-driven modeling, Physics-based modeling, Scientific machine learning},
 	pages = {615--627},
 }
 
@@ -288,7 +427,7 @@
 	author = {Suk, Julian and de Haan, Pim and Lippe, Phillip and Brune, Christoph and Wolterink, Jelmer M.},
 	month = may,
 	year = {2024},
-	keywords = {Computational fluid dynamics, Coronary arteries, Graph convolutional networks, Group-equivariance, Wall shear stress},
+	keywords = {Computational fluid dynamics, Wall shear stress, Coronary arteries, Graph convolutional networks, Group-equivariance},
 	pages = {108328},
 	file = {ScienceDirect Snapshot:C\:\\Users\\vince\\Zotero\\storage\\IJF4J9X5\\S0010482524004128.html:text/html;Submitted Version:C\:\\Users\\vince\\Zotero\\storage\\QJJVCH24\\Suk et al. - 2024 - Mesh neural networks for SE(3)-equivariant hemodyn.pdf:application/pdf},
 }
@@ -352,7 +491,7 @@
 	author = {Garnier, Paul and Viquerat, Jonathan and Hachem, Elie},
 	month = sep,
 	year = {2024},
-	keywords = {and Science, Computer Science - Computational Engineering, Computer Science - Machine Learning, Finance},
+	keywords = {Computer Science - Machine Learning, and Science, Computer Science - Computational Engineering, Finance},
 	file = {Preprint PDF:C\:\\Users\\vince\\Zotero\\storage\\XZD8YQ4K\\Garnier et al. - 2024 - Multi-Grid Graph Neural Networks with Self-Attenti.pdf:application/pdf;Snapshot:C\:\\Users\\vince\\Zotero\\storage\\FUVCRS84\\2409.html:text/html},
 }
 
@@ -390,7 +529,7 @@
 	journal = {Computer Methods and Programs in Biomedicine},
 	author = {Sen, Ahmet and Ghajar-Rahimi, Elnaz and Aguirre, Miquel and Navarro, Laurent and Goergen, Craig J. and Avril, Stephane},
 	year = {2024},
-	keywords = {Blood flow modeling, Graph neural network, Machine learning, Physics-Informed Neural Networks, Pulse wave propagation},
+	keywords = {Machine learning, Blood flow modeling, Graph neural network, Physics-Informed Neural Networks, Pulse wave propagation},
 	pages = {108427},
 }
 
@@ -430,7 +569,7 @@
 	journal = {Physiol Meas},
 	author = {Hoi, Yiemeng and Wasserman, Bruce A. and Xie, Yuanyuan J and Najjar, Samer S. and Ferruci, Luigi and Lakatta, Edward G. and Gerstenblith, Gary and Steinman, David A.},
 	year = {2011},
-	keywords = {augmentation index, carotid bifurcation, human studies, magnetic resonance imaging, volumetric flow rate},
+	keywords = {carotid bifurcation, augmentation index, human studies, magnetic resonance imaging, volumetric flow rate},
 	pages = {291--302},
 }
 
@@ -446,7 +585,7 @@
 	author = {Ford, Matthew D. and Alperin, Noam and Lee, Sung Hoon and Holdsworth, David W. and Steinman, David A.},
 	month = aug,
 	year = {2005},
-	keywords = {Adult, Blood Flow Velocity, Blood Volume, Carotid Arteries, Cerebrovascular Circulation, Computer-Assisted, Female, Humans, Image Interpretation, Magnetic Resonance Imaging, Male, Reference Values, Reproducibility of Results, Sensitivity and Specificity, Vertebral Artery},
+	keywords = {Humans, Female, Male, Adult, Cerebrovascular Circulation, Blood Flow Velocity, Magnetic Resonance Imaging, Blood Volume, Carotid Arteries, Reference Values, Reproducibility of Results, Sensitivity and Specificity, Vertebral Artery, Computer-Assisted, Image Interpretation},
 	pages = {477--488},
 }
 
@@ -480,7 +619,7 @@
 	author = {Sunderland, Kevin and Jiang, Jingfeng and Zhao, Feng},
 	month = jan,
 	year = {2022},
-	keywords = {aneurysm, disturbed flow, Endothelial Cells, Extracellular Matrix, Hemodynamics, Humans, inflammation, Inflammation, Intracranial Aneurysm, vascular cells},
+	keywords = {Humans, Intracranial Aneurysm, Hemodynamics, aneurysm, disturbed flow, Endothelial Cells, Extracellular Matrix, inflammation, Inflammation, vascular cells},
 	pages = {278--300},
 }
 
@@ -496,7 +635,7 @@
 	author = {Baz, Radu Andrei and Scheau, Cristian and Niscoveanu, Cosmin and Bordei, Petru},
 	month = aug,
 	year = {2021},
-	keywords = {anatomy, Angiography, anthropometry, Carotid Artery, Computed Tomography Angiography, CT angiography, Female, Humans, imaging study, Internal, internal carotid artery, Male, morphometry, Tomography, X-Ray Computed},
+	keywords = {Humans, Female, Male, anatomy, Angiography, anthropometry, Computed Tomography Angiography, CT angiography, imaging study, internal carotid artery, morphometry, Carotid Artery, Internal, Tomography, X-Ray Computed},
 	pages = {832},
 	file = {Full Text:C\:\\Users\\vince\\Zotero\\storage\\8MBFKLBC\\Baz et al. - 2021 - Morphometry of the Entire Internal Carotid Artery .pdf:application/pdf},
 }
@@ -580,7 +719,7 @@
 	author = {Lu, Xiaowen and Chen, Junchen and Liao, Yonghong and Wang, Xiangyu},
 	month = sep,
 	year = {2025},
-	keywords = {Displacement, Fluid-structure interaction, Middle cerebral artery aneurysms relative residence time, Oscillatory shear index},
+	keywords = {Oscillatory shear index, Displacement, Fluid-structure interaction, Middle cerebral artery aneurysms relative residence time},
 	pages = {111433},
 	file = {ScienceDirect Snapshot:C\:\\Users\\vince\\Zotero\\storage\\UWCLUAW5\\S0967586825004060.html:text/html},
 }
@@ -597,7 +736,7 @@
 	journal = {AJNR. American journal of neuroradiology},
 	author = {Qian, Y. and Takao, H. and Umezu, M. and Murayama, Y.},
 	year = {2011},
-	keywords = {Aged, Aortic Dissection, Biological, Blood Flow Velocity, Cerebral Arteries, Cerebrovascular Circulation, Computer Simulation, Humans, Intracranial Aneurysm, Middle Aged, Models, Pilot Projects, Risk Assessment, Risk Factors},
+	keywords = {Humans, Intracranial Aneurysm, Cerebral Arteries, Middle Aged, Aged, Cerebrovascular Circulation, Pilot Projects, Risk Factors, Blood Flow Velocity, Computer Simulation, Aortic Dissection, Risk Assessment, Biological, Models},
 	pages = {1948--1955},
 	file = {Full Text:C\:\\Users\\vince\\Zotero\\storage\\8WU9KVL4\\Qian et al. - 2011 - Risk analysis of unruptured aneurysms using comput.pdf:application/pdf},
 }
@@ -616,7 +755,7 @@
 	author = {Saalfeld, Sylvia and Voß, Samuel and Beuing, Oliver and Preim, Bernhard and Berg, Philipp},
 	month = oct,
 	year = {2019},
-	keywords = {Computational fluid dynamics, Hemodynamic simulation, Intracranial aneurysms, Outlet boundary condition},
+	keywords = {Computational fluid dynamics, Intracranial aneurysms, Hemodynamic simulation, Outlet boundary condition},
 	pages = {1805--1813},
 }
 
@@ -635,7 +774,7 @@
 	author = {Feiger, Bradley and Gounley, John and Adler, Dale and Leopold, Jane A. and Draeger, Erik W. and Chaudhury, Rafeed and Ryan, Justin and Pathangey, Girish and Winarta, Kevin and Frakes, David and Michor, Franziska and Randles, Amanda},
 	month = jun,
 	year = {2020},
-	keywords = {Computational models, Machine learning},
+	keywords = {Machine learning, Computational models},
 	pages = {9508},
 	file = {Full Text PDF:C\:\\Users\\vince\\Zotero\\storage\\LWRPF9HK\\Feiger et al. - 2020 - Accelerating massively parallel hemodynamic models.pdf:application/pdf},
 }
@@ -687,7 +826,7 @@
 	author = {Liang, Liang and Mao, Wenbin and Sun, Wei},
 	month = jan,
 	year = {2020},
-	keywords = {Computational fluid dynamics, Deep neural network, Hemodynamic analysis, Machine learning},
+	keywords = {Machine learning, Computational fluid dynamics, Deep neural network, Hemodynamic analysis},
 	pages = {109544},
 	file = {ScienceDirect Snapshot:C\:\\Users\\vince\\Zotero\\storage\\AF9G8D8X\\S0021929019308012.html:text/html},
 }
@@ -705,7 +844,7 @@
 	author = {Larrabide, Ignacio and Geers, Arjan J. and Morales, Hernán G. and Bijlenga, Philippe and Rüfenacht, Daniel A.},
 	month = jun,
 	year = {2016},
-	keywords = {Flow diverter, Intracranial aneurysms, Time dependency, Velocity, WSS},
+	keywords = {Velocity, Intracranial aneurysms, Flow diverter, Time dependency, WSS},
 	pages = {2--8},
 	file = {ScienceDirect Full Text PDF:C\:\\Users\\vince\\Zotero\\storage\\UVQ6T7BN\\Larrabide et al. - 2016 - Change in aneurysmal flow pulsatility after flow diverter treatment.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\vince\\Zotero\\storage\\96E8YLXH\\S0895611115000105.html:text/html},
 }
