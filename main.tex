@@ -6,6 +6,7 @@
 \usepackage{float}
 \usepackage{nameref}
 \usepackage{hyperref, graphicx, wrapfig, booktabs, svg}
+\usepackage{xr-hyper}
 \usepackage{bm}
 \usepackage{makecell}
 \usepackage[dvipsnames]{xcolor}
@@ -25,6 +26,18 @@
     left=10pt, right=10pt, top=8pt, bottom=8pt,
     fontupper=\itshape,
 }
+
+\newcommand{\bookaux}{/Users/vince/Documents/These/Redaction/PhdThesis/build/Main}
+
+\ifx\bookaux\empty
+  \typeout{No bookpath.tex: references to other chapters will show ??}
+\else
+  \IfFileExists{\bookaux.aux}{%
+    \externaldocument{\bookaux}[\bookaux.pdf]%
+  }{%
+    \typeout{Book aux not found at \bookaux.aux}%
+  }
+\fi
 
 \journal{NPJ}
 
