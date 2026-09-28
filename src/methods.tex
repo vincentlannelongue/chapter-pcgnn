@@ -69,7 +69,7 @@ This framework unveils a higher level of complexity compared to benchmark fluid 
 For a GNN-based CFD surrogate approach to be justified, the GNN counterpart to traditional numerical solvers needs to produce local physical spatio-temporal fields in a relatively thin margin of error from the CFD ground truth outputs, with a significant reduction in computing time.
 
 
-\subsection{Dataset generation}\label{sec:dataset_details}
+\subsection{Dataset generation}\label{ch3:sec:dataset_details}
 
 For each of the 105 semi-idealized aneurysm geometries, numerical fluid simulations were performed following the general fluid mechanics problem formulated in the previous subsection, with a 0.001s timestep. All the geometries hemodynamics were simulated using the velocity profile derived from \cite{ford_characterization_2005}. The simulations ran in on in-house finite-element C++ based library by solving a mixed formulation of the incompressible Navier-Stokes equations (\autoref{ch2:eq:navier-stokes}) using a variational multiscale (VMS) method, as described by Hachem et al. \cite{hachem_stabilized_2010}.
 
