@@ -1,6 +1,7 @@
 
-\documentclass[final,1p,times,twocolumn,numbers, 12pt]{elsarticle}
-
+% \documentclass[final,1p,times,twocolumn,numbers, 12pt]{elsarticle}
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{float}
@@ -39,41 +40,13 @@
   }
 \fi
 
-\journal{NPJ}
+
+\title{PCGNN}
+\date{February 2026}
 
 \begin{document}
 
-\begin{frontmatter}
-
-
-\title{Physics Constrained Graph Neural Network for Real Time Prediction of Intracranial Aneurysm Hemodynamics} %% Article title
-
-\author[1]{Vincent Lannelongue} 
-\author[1]{Paul Garnier} 
-\author[1]{Pablo Jeken-Rico} 
-\author[1]{Aurèle Goetz} 
-\author[1]{Philippe Meliga} 
-\author[2]{Yves Chau} 
-\author[1]{Elie Hachem}\corref{{cor1}}
-\ead{elie.hachem@minesparis.psl.eu}
-
-
-\cortext[cor1]{Corresponding author}
-
-%% Author affiliation
-\affiliation[1]{organization={Mines Paris - PSL, University Centre for Material Forming (CEMEF) CNRS},
-            country={France}}
-
-\affiliation[2]{
-    organization={Interventional Neuroradiology Department, Nice University Hospital},
-    city={Nice},
-    postcode={06100}, 
-    state={Alpes-Maritimes},
-    country={France}
-}
-
-
-\end{frontmatter}
+\maketitle
 
 \import{src}{abstracts}
 
@@ -90,8 +63,8 @@
 \import{src}{discussion}
 
 
- \bibliographystyle{unsrt}
- \bibliography{references}
+\bibliographystyle{unsrt}
+\bibliography{references}
 
 \end{document}
 
