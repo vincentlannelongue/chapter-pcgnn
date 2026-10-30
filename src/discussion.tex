@@ -8,6 +8,34 @@ Prior ML-based approaches for hemodynamic modeling have mostly focused on reduce
 
 Furthermore, we have confronted our method to out-of-distribution unseen cases with different inflow rates and patient-specific cases, and observed that our model had obtained generalization capabilities and was able to uncover realistic flow patterns with no additional training. These preliminary results highlight the potential of our approach as a foundation for future fine-tuning toward patient-specific clinical applications.
 
+Furthermore, we tested the model on four zero-shot predictions on out-of-distribution, patient-specific aneurysm geometries. These new cases were selected from our internal database and exhibit a range of morphological variations, including aneurysm location, parent vessel diameter, neck size, aneurysm sac diameter, and centerline length. Their geometrical features are further described in \autoref{tab:0-shot_cases} and highlight the difference of these cases from the BenchAnXplore training and testing data. The In-PI-MGN model trained only on synthetic semi-idealized geometries was able to partially reproduce realistic flow behaviors in this complex clinical scenario. While the predicted velocity fields show discrepancies in order-of-magnitude for cases 3 and 4, the predicted velocity fields match the CFD ground truth in spatial distribution in all cases as shown in \autoref{fig:real_cases}. However, the model showed uneven behavior between cases, and while the predictions on these 4 cases are interesting, predictions on other cases were not satisfying.
+
+\begin{table}[ht]
+    \centering
+    {\begin{tabular}{l c c c c c}
+        \toprule
+        \textbf{Case} & \small{\textbf{Location}} & \makecell{\small{\textbf{Inlet}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Aneurysm}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Aneurysm neck}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Centerline}}\\ \small{\textbf{Length}}}\\
+        \midrule \midrule
+        \textbf{Case 1} & \text{ICA} & 4.8 & 4.5  & 4.2 & 49.1  \\
+        \textbf{Case 2} & \text{MCA} & 2.5 & 6.0  & 5.2 & 23.2  \\
+        \textbf{Case 3} & \text{MCA} & 2.7 & 7.8  & 7.3 & 21.4  \\
+        \textbf{Case 4} & \text{ICA} & 4.3 & 15.0 & 8.7 & 65.5  \\
+        \midrule \midrule
+        \small{\textbf{BenchAnXplore}} & ICA & 4.0 & 3 - 9 & 3.2 & 25.6 \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Zero-shot cases geometrical description with aneurysm location, inlet artery diameter, aneurysm diameter, aneurysm neck diameter and artery centerline length from inlet to furthest outlet, all in mm. The BenchAnXplore values are given as a comparison.}
+    \label{tab:0-shot_cases}
+\end{table}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=1\textwidth]{figs/0shot_preds.pdf}
+\caption{Zero-shot predictions on out-of-distribution patient-specific ICA and MCA aneurysm cases.}
+\label{fig:real_cases}
+\end{figure}
+
+
 In summary, this work offers a reproducible, extensible framework that brings high-fidelity hemodynamic inference closer to real-time clinical use. By enabling rapid hemodynamic inference with strong physical consistency, this work paves the way for real-time risk assessment, personalized treatment planning, and simulation-augmented clinical workflows. It offers a reproducible and extensible step toward bridging high-fidelity fluid mechanics and deep learning in cerebrovascular medicine.
 
 However, several important limitations remain before clinical deployment can be fully realized. First and foremost, the proposed model is trained on idealized vessel geometries. Clinical routine is characterized by a wide variety of anatomical presentations in terms of size, shape, and orientation. As highlighted by the promising yet degraded performance of our model on out-of-distribution patient-specific cases (e.g., average 50-step relative velocity error on the four cases of 11\% compared to 1.6\% on the original test set), generalization to clinical settings requires training on representative data. While our current dataset is varied and complex enough to serve as a valuable benchmark for model evaluation, it represents only a first step toward patient-specific hemodynamics prediction. In future work, this will need to be complemented by a larger collection of patient-derived geometries or the generation of more realistic synthetic cases.
@@ -15,8 +43,6 @@ However, several important limitations remain before clinical deployment can be 
 
 Second, our CFD ground-truth simulations were generated using a single, temporally and spatially idealized inflow profile. We have demonstrated the model’s ability to generalize across different inflow time profiles, even when these were not part of the training data. Although these inflow rates are widely used in CFD studies of intracranial aneurysms~\cite{cebral_characterization_2005, larrabide_change_2016, lu_hemodynamics_2025}, they remain statistical means extracted from literature~\cite{reymond_validation_2009, hoi_characterization_2011}, and may not reflect true patient-specific variability. It would be highly valuable to extend this approach to include clinically acquired Doppler ultrasound or 4D Flow MRI inflow profiles. Additionally, all inlet profiles in this study are prescribed as idealized parabolic flows, which—while common~\cite{qian_risk_2011, larrabide_change_2016, lu_hemodynamics_2025}, omit higher-order effects captured in more realistic Womersley profiles~\cite{cebral_characterization_2005}. Fortunately, previous studies have shown that aneurysmal flow patterns remain robust across such inlet assumptions when appropriate domain lengths are used~\cite{saalfeld_flow-splitting-based_2019}. Nonetheless, we aim to integrate 4D Flow MRI-derived boundary conditions in future work~\cite{brindise_multi-modality_2019}, both for fine-tuning and evaluating our model under more realistic conditions.
 
-
-
 Lastly, we acknowledge that while hemodynamic quantities such as wall shear stress (WSS) and oscillatory shear index (OSI) are commonly studied, a biomarker strongly correlated with intracranial aneurysm rupture risk remains elusive. The interpretation of these biomarkers, including proposed thresholds for risk stratification, continues to be debated within the scientific and medical communities. While the primary objective of this work is not direct rupture prediction, it is important to clarify that our model outputs are intended to serve as high-fidelity, physics-consistent inputs to further risk analysis, not as standalone diagnostic tools. We see this as a step toward augmenting clinical decision-making by providing accessible, real-time flow field estimation, which can be combined with other risk factors to support informed diagnostic.
 
-Building on this foundation, future work may explore advanced architectures such as multigrid GNNs \cite{garnier_multi-grid_2024}, which enable hierarchical information flow across mesh scales, and attention-based GNNs, which enhance the model’s ability to prioritize key flow structures. These approaches could enable higher-resolution predictions while preserving computational efficiency, further advancing AI-driven hemodynamic modeling. Moreover, while we demonstrate zero-shot generalization on both unseen inflow profiles and a fully patient-specific case, we emphasize the need for further validation on larger, more heterogeneous clinical datasets, to support further research.
+Building on this foundation, our following effort has been to build a more complex database to aim towards patient-specific robust hemodynamics. In the next chapter, we will try to address the limitations of the current work by working with more complex aneurysl cases as well as CFD-grade meshes and accurate WSS fields.

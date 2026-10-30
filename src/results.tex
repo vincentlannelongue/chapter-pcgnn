@@ -198,9 +198,9 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 
 \subsection{Generalization to unseen cases}
 
-In order to evaluate the generalization capability of the model trained solely on semi-idealized geometries, we conducted two experiments without any additional fine-tuning. Indeed, the proposed GNN framework operates entirely on local mesh and flow features rather than relying on global geometry descriptors, therefore, it is essential to assess its ability to adapt to new settings, provided the underlying physics and boundary conditions remain comparable.
+In order to evaluate the generalization capability of the model trained solely on semi-idealized geometries, we conducted an experiment without any additional fine-tuning. Indeed, the proposed GNN framework operates entirely on local mesh and flow features rather than relying on global geometry descriptors, therefore, it is essential to assess its ability to adapt to new settings, provided the underlying physics and boundary conditions remain comparable.
 
-First, we examined the model’s robustness to unseen inflow rates. We ran new CFD simulations on our three test cases using alternative inflow velocity time profiles from ICA and middle cerebral artery (MCA) as well, derived from the literature \cite{reymond_validation_2009, hoi_characterization_2011}, shown in \autoref{fig:inflow_profiles}. When evaluated on these six new inflow conditions (with no retraining), the model achieved a 1-step RMSE of 2.4 and a 50-step RMSE of 14.3. Velocity field comparisons in \autoref{fig:slices_inflow} confirm that predictions remain close to the ground truth, despite never encountering these inflow profiles during training. This result demonstrates the model’s adaptability to physiologically realistic variations in inflow dynamics, even though it was trained on a single fixed profile.
+We examined the model’s robustness to unseen inflow rates. We ran new CFD simulations on our three test cases using two alternative inflow velocity time profiles from ICA and middle cerebral artery (MCA) as well, derived from the literature \cite{reymond_validation_2009, hoi_characterization_2011}, shown in \autoref{fig:inflow_profiles}. When evaluated on these six new cases with no retraining, the model achieved a 1-step RMSE of 2.4 and a 50-step RMSE of 14.3. Velocity field comparisons in \autoref{fig:slices_inflow} confirm that predictions remain close to the ground truth, despite never encountering these inflow profiles during training. This result demonstrates the model’s adaptability to physiologically realistic variations in inflow dynamics, even though it was trained on a single fixed profile.
 
 \begin{figure}[!ht]
 \centering
@@ -212,53 +212,6 @@ First, we examined the model’s robustness to unseen inflow rates. We ran new C
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=1\textwidth]{figs/neck_velocity_comp.pdf}
-\caption{Blood velocity comparison at the aneurysm neck on unseen velocity profiles.}
+\caption{Blood velocity comparison at the aneurysm neck on unseen velocity inflow profiles.}
 \label{fig:slices_inflow}
-\end{figure}
-
-Second, we tested the model on four zero-shot predictions on out-of-distribution, patient-specific aneurysm geometries. These new cases were randomly selected from our internal database and exhibit a range of morphological variations, including aneurysm location, parent vessel diameter, neck size, aneurysm sac diameter, and centerline length. Their geometrical features are further described in \autoref{tab:0-shot_cases} and highlight the difference of these cases from the BenchAnXplore training and testing data.
-
-Remarkably, the In-PI-MGN model trained only on synthetic semi-idealized geometries was able to reproduce realistic flow behaviors in this complex clinical scenario. While the predicted velocity fields show discrepancies in order-of-magnitude for cases 3 and 4, the predicted velocity fields match the CFD ground truth in spatial distribution in all cases as shown in \autoref{fig:real_cases}. 
-
-\begin{table}[ht]
-    \centering
-    {\begin{tabular}{l c c c c c}
-        \toprule
-        \textbf{Case} & \small{\textbf{Location}} & \makecell{\small{\textbf{Inlet}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Aneurysm}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Aneurysm neck}}\\ \small{\textbf{diameter}}} & \makecell{\small{\textbf{Centerline}}\\ \small{\textbf{Length}}}\\
-        \midrule \midrule
-        \textbf{Case 1} & \text{ICA} & 4.8 & 4.5  & 4.2 & 49.1  \\
-        \textbf{Case 2} & \text{MCA} & 2.5 & 6.0  & 5.2 & 23.2  \\
-        \textbf{Case 3} & \text{MCA} & 2.7 & 7.8  & 7.3 & 21.4  \\
-        \textbf{Case 4} & \text{ICA} & 4.3 & 15.0 & 8.7 & 65.5  \\
-        \midrule \midrule
-        \small{\textbf{BenchAnXplore}} & ICA & 4.0 & 3 - 9 & 3.2 & 25.6 \\
-        \bottomrule
-    \end{tabular}}
-    \caption{Zero-shot cases geometrical description with aneurysm location, inlet artery diameter, aneurysm diameter, aneurysm neck diameter and artery centerline length from inlet to furthest outlet, all in mm. The BenchAnXplore values are given as a comparison.}
-    \label{tab:0-shot_cases}
-\end{table}
-
-% \begin{table}[ht]
-%     \centering
-%     {\begin{tabular}{l c c}
-%         \toprule
-%         \textbf{Case} & \small{\textbf{1-RMSE}} & \small{\textbf{50-RMSE}}\\
-%         \midrule \midrule
-%         \textbf{Case 1} & 2.76 & 65.41   \\
-%         \textbf{Case 2} & 0.80 & 45.77  \\
-%         \textbf{Case 3} & 2.42 & 68.14  \\
-%         \textbf{Case 4} & 3.75 & 117.64  \\
-%         \midrule \midrule
-%         \small{\textbf{BenchAnXplore}} & 0.85 & 7.58 \\
-%         \bottomrule
-%     \end{tabular}}
-%     \caption{Model performance on zero-shot cases. The BenchAnXplore test set values are given as a comparison.}
-%     \label{tab:0-shot_errors}
-% \end{table}
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=1\textwidth]{figs/0shot_preds.pdf}
-\caption{Zero-shot predictions on out-of-distribution patient-specific ICA and MCA aneurysm cases.}
-\label{fig:real_cases}
 \end{figure}
