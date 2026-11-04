@@ -14,6 +14,13 @@ The bulges range from 3 to 9 mm in diameter, covering diverse pathological shape
 
 We generated the \textbf{BenchAnXplore} dataset following the meshing, coarsening and simulation processes further detailed in the \nameref{sec:Methods} section, and obtained 105 aneurysm geometries, with 80 simulated timeframes for each of these cases. This dataset is now made available as a benchmark case for AI intracranial aneurysms applications.
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.70\textwidth, trim={620 0 700 50}, clip]{figs/testset.png}
+    \caption{Test set of 10 representative blood flow CFD simulations.}
+    \label{fig:test_set}
+\end{figure}
+
 
 \subsection{Training} \label{sec:training}
 We trained and compared four models to evaluate the impact of node feature enhancement and physically-informed improvements separately. To ensure a fair comparison, all models were trained using the same configuration. All MLPs (multilayer perceptrons) used for encoders, decoders and update functions within the GN blocks, have two hidden layers of 128 neurons each, and use a ReLU activation function. We used 15 rounds of message passing, bringing the total number of parameters to approximately 3 million.
@@ -29,9 +36,9 @@ We trained for 20 epochs e.g. 144k training steps, using a fixed learning rate o
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.70\textwidth, trim={620 0 700 50}, clip]{figs/testset.png}
-    \caption{Test set of 10 representative blood flow CFD simulations.}
-    \label{fig:test_set}
+    \includegraphics[width=0.9\textwidth]{figs/evalutation_cases.pdf}
+    \caption{Evaluation cases with \textbf{(a)}: cases chosen from our testing dataset for deeper analysis; \textbf{(b)}: pulsatile inflow rate, with 3 chosen time frames for evaluation; \textbf{(c)}: slice and points used for velocity data extraction.}
+    \label{fig:eval_cases}
 \end{figure}
 
 \paragraph{Boundary conditions} To handle boundary conditions over the domain, we added a node type as an input feature to separate different training behaviors according to the considered nodes. We fixed a null velocity for the wall nodes and did not compute loss nor performed learning onto these nodes. The velocity at the inlet nodes was fixed; we imposed the same pulsatile parabolic inflow profile as in the ground-truth CFD simulations. All other nodes of the fluid domain, outflow included, were used to train the network.
@@ -40,22 +47,23 @@ We trained for 20 epochs e.g. 144k training steps, using a fixed learning rate o
 
 \paragraph{Timestep} To simplify training and eliminate temporal ambiguity, we fixed the training timestep to 0.01 s, which is coarser than the CFD solver’s timestep of 0.001 s. This was done intentionally to reduce sequence length while maintaining temporal coherence. As such, the model is not required to generalize to arbitrary time horizons. While we did not test interpolation across multiple timestep sizes, the current design is adequate for clinical use cases where a consistent frame rate is expected.
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figs/evalutation_cases.pdf}
-    \caption{Evaluation cases with \textbf{(a)}: cases chosen from our testing dataset for deeper analysis; \textbf{(b)}: pulsatile inflow rate, with 3 chosen time frames for evaluation; \textbf{(c)}: slice and points used for velocity data extraction.}
-    \label{fig:eval_cases}
-\end{figure}
 
 \subsection{Numerical performance}
-
-We evaluated all four models on the full test set for both next-step and rollout prediction with 1-step and 50-step Root Mean Square Errors (RMSE) as described in the \nameref{sec:Methods} section; mean errors over all test cases are given in \autoref{tab:model-configurations}. While all models perform well on next-step prediction, as shown by the 1-step error in \autoref{tab:model-configurations}, significant differences emerge in rollout prediction in particular at time $t_2$ as clearly highlighted in  \autoref{fig:model_comparison}. 
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=1.05\textwidth]{figs/model_rollout_comp.pdf}
 \caption{Rollout predictions at time $t_2$ for all trained models.}
 \label{fig:model_comparison}
+\end{figure}
+
+We evaluated all four models on the full test set for both next-step and rollout prediction with 1-step and 50-step Root Mean Square Errors (RMSE) as described in the \nameref{sec:Methods} section; mean errors over all test cases are given in \autoref{tab:model-configurations}. While all models perform well on next-step prediction, as shown by the 1-step error in \autoref{tab:model-configurations}, significant differences emerge in rollout prediction in particular at time $t_2$ as clearly highlighted in  \autoref{fig:model_comparison}. 
+
+\begin{figure}[!ht]
+    \centering
+     \includegraphics[width=0.3\textwidth]{figs/geometry_zones.pdf}
+    \caption{Split of our geometries at planes $y=8.5$ mm and $y=7$ mm to evaluate RMSE metrics in three anatomically regions: the aneurysm bulge (blue), the neck (red) and the parent artery (green).}
+    \label{fig:anev_regions}
 \end{figure}
 
 Indeed, the In-MGN and In-PI-MGN models produce high-quality rollouts, with the 50-step error for In-PI-MGN being more than six times lower than the MGN baseline. In-MGN also performs well on longer predictions, whereas introducing the physical loss alone does not improve long-term prediction performance. Both MGN and PI-MGN models converge for single-step predictions but struggle with error accumulation in rollout predictions. 
@@ -75,14 +83,6 @@ Indeed, the In-MGN and In-PI-MGN models produce high-quality rollouts, with the 
     \caption{Model configurations and performance. Errors averaged on the test set over the whole geometry; next step prediction (1-RMSE) and rollout predictions (50-RMSE) errors are given in mm/s. The standard deviation (SD) of the 50-RMSE across the test set cases is also displayed. Best results are displayed in \textbf{bold}; second best in \textit{italic}}
     \label{tab:model-configurations}
 \end{table}
-
-
-\begin{figure}[!ht]
-    \centering
-     \includegraphics[width=0.3\textwidth]{figs/geometry_zones.pdf}
-    \caption{Split of our geometries at planes $y=8.5$ mm and $y=7$ mm to evaluate RMSE metrics in three anatomically regions: the aneurysm bulge (blue), the neck (red) and the parent artery (green).}
-    \label{fig:anev_regions}
-\end{figure}
 
 Because all geometries share the same parent artery, averaging the errors over the entire domain may obscure localized variations in model performance. To better assess the predictive accuracy of each model, we computed the 1-step and 50-step RMSEs separately across three anatomically distinct regions: the aneurysm bulge, the neck, and the distal segment of the parent artery (see \autoref{fig:anev_regions}). The results for all four models are summarized in \autoref{tab:results_region}, confirming the same overall tendencies observed in the global error metrics.
 
@@ -117,47 +117,43 @@ Because all geometries share the same parent artery, averaging the errors over t
     \label{tab:results_region}
 \end{table}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figs/timeflow_B.pdf}
+    \caption{Blood flow during systole for Case B, showing predictions closely matching simulations throughout the acceleration phase}
+    \label{fig:streamlines_time}
+\end{figure}
+
 To assess the individual impact of acceleration and inflow information on model performance, we conducted an ablation study as part of our experiments. The results showed that adding inflow features alone improved both training convergence and long-term rollout predictions, whereas adding acceleration without inflow features did not lead to model convergence. This suggests that local temporal history is insufficient for accurate prediction in the absence of global context. The combination of both inflow and acceleration features yielded the best performance in terms of error metrics and qualitative agreement with CFD fields.
-
-
 
 Figures \ref{fig:streamlines_time} and \ref{fig:streamlines_case_c} show a temporal analysis of the full geometry volume. It clearly demonstrate that GNN predictions are closely aligned with ground truth CFD simulations, even during the systolic phase, where velocity fluctuations are pronounced. Additionally, the model effectively captures the evolution of recirculation within the aneurysm bulge. To assess the model’s performance across a diverse range of flow characteristics and bulge shapes, velocity predictions were generated for the entire test set, as illustrated in \autoref{fig:test_comparison}. 
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.98\textwidth]{figs/timeflow_B.pdf}
-    \caption{Blood flow during systole for Case B, showing predictions closely matching simulations throughout the acceleration phase}
-    \label{fig:streamlines_time}
+    \includegraphics[width=0.94\textwidth]{figs/timeflow_C.pdf}
+    \caption{Blood flow during systole for Case C, demonstrating accurate predictions in a larger, more asymmetrical aneurysm bulge.}
+    \label{fig:streamlines_case_c}
 \end{figure}
 
 Quantitative comparisons at the aneurysm neck (\autoref{fig:slice_1}) demonstrate good agreement in predicted flow dynamics, particularly where high-velocity jets interact with the aneurysm wall. Velocity measurements at evaluation points (\autoref{fig:point_velocity_comparison}) further illustrate model accuracy. While the baseline MGN model deviates significantly from the ground truth after a few timesteps, both inflow enhanced In-MGN and In-PI-MGN maintain an error margin within 5\% for most of the cardiac cycle at $p_{neck}$ and $p_{out}$. Predictions at $p_{wall}$ are less precise for In-MGN and exhibit some delay, whereas In-PI-MGN remains closely aligned with the ground truth, particularly after systole.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.98\textwidth]{figs/timeflow_C.pdf}
-    \caption{Blood flow during systole for Case C, demonstrating accurate predictions in a larger, more asymmetrical aneurysm bulge.}
-    \label{fig:streamlines_case_c}
-\end{figure}
-
-\begin{figure}[!ht]
 \centering
-\includegraphics[width=1\textwidth]{figs/testset_comp.pdf}
+\includegraphics[width=0.93\textwidth]{figs/testset_comp.pdf}
 \caption{Velocity fields comparison for the whole test set at time $t_2$.}
 \label{fig:test_comparison}
 \end{figure}
 
 Beyond velocity evaluation, WSS results derived from velocity fields were also analyzed by comparing TAWSS in the aneurysm bulge for the In-PI-MGN model and the ground truth, as shown in \autoref{fig:tawss} and \autoref{fig:time_wss}. The prediction error remains within 10\% across the entire test set, demonstrating strong agreement between predicted and reference patterns. Finally, instant WSS and space-averaged WSS (SAWSS) were examined in \autoref{fig:sawss} to track WSS variations throughout the cardiac cycle. The SAWSS curves indicate that while the In-MGN model follows the general trend, the In-PI-MGN model exhibits the closest match to the reference, particularly in capturing peak values and transient dynamics. The WSS plots at our three evaluation timesteps confirm again the accuracy of the model pattern prediction over the cardiac cycle.
 
-Furthermore, in order to evaluate the ability of the model to conserve mass, we conducted quantitative mass flow analyses at multiple cross-sectional planes along the artery, as displayed in \autoref{fig:massflow}. Specifically, we measured the instantaneous volumetric flow rates at the inlet, the outlet, and at two additional intermediate planes normal to the centerline of the parent artery. These measurements were performed across the full cardiac cycle for both the CFD ground truth and the In-PI-MGN model predictions.
-
-The results are presented in \autoref{fig:massflow} illustrating the flow rates across the geometry for both the ground truth and the predicted velocity fields. The mean difference between inlet and outlet flow rates for ground truth and prediction are 2.3\% and 3.7\% respectively, with maximums across the cardiac cycle at 2.9\% and 5.2\%. These results further support that the model captures not only the spatial and temporal dynamics of blood flow but also also respects core physical laws such as continuity.
-
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=1\textwidth]{figs/neck_slice_comp.pdf}
+    \includegraphics[width=0.95\textwidth]{figs/neck_slice_comp.pdf}
     \caption{Blood velocity comparison at the aneurysm neck; displayed error is normalized by maximum ground-truth velocity at the given timestep. Maximum error is occurring at high speed flow regions close to the wall, and remains below 8\%.}
     \label{fig:slice_1}
 \end{figure}
+
+Furthermore, in order to evaluate the ability of the model to conserve mass, we conducted quantitative mass flow analyses at multiple cross-sectional planes along the artery, as displayed in \autoref{fig:massflow}. Specifically, we measured the instantaneous volumetric flow rates at the inlet, the outlet, and at two additional intermediate planes normal to the centerline of the parent artery. These measurements were performed across the full cardiac cycle for both the CFD ground truth and the In-PI-MGN model predictions.
 
 \begin{figure}[!ht]
     \centering
@@ -165,6 +161,8 @@ The results are presented in \autoref{fig:massflow} illustrating the flow rates 
 \caption{Velocity evolution plotted over time for Case A.}
 \label{fig:point_velocity_comparison}
 \end{figure}
+
+The results are presented in \autoref{fig:massflow} illustrating the flow rates across the geometry for both the ground truth and the predicted velocity fields. The mean difference between inlet and outlet flow rates for ground truth and prediction are 2.3\% and 3.7\% respectively, with maximums across the cardiac cycle at 2.9\% and 5.2\%. These results further support that the model captures not only the spatial and temporal dynamics of blood flow but also also respects core physical laws such as continuity.
 
 \begin{figure}[!ht]
     \centering
